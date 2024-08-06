@@ -1,5 +1,7 @@
 forms-smoke-test
 
+Needs to have a form name - Do not use - Used for Automated Tests in your environment for the test to pass
+
 The template to create a service that runs WDIO tests against an environment.
 
 - [Requirements](#requirements)

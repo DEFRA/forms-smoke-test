@@ -2,7 +2,7 @@ import { Page } from 'page-objects/page'
 
 class HomePage extends Page {
   open() {
-    return super.open('preview/draft/form-a1/page-one')
+    return super.open('/preview/draft/do-not-use-used-for-automated-tests')
   }
 }
 
