@@ -18,7 +18,7 @@ describe('Forms Preview', () => {
     const sendButton = await $('button=Send')
     await sendButton.click()
     await expect(browser).toHaveTitle(
-      'Application complete - Do not use - Used for Automated Tests - GOV.UK'
+      'Form submitted - Do not use - Used for Automated Tests - GOV.UK'
     )
   })
 })
