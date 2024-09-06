@@ -6,10 +6,10 @@ describe('Library', () => {
     await signInPage.open()
     await signInPage.signIn()
 
-    await expect(browser).toHaveTitle('Forms library')
+    await expect(browser).toHaveText('Forms library')
 
     await $('a[href = "/create"]').click()
-    await expect(browser).toHaveTitle('Enter a name for your form')
+    await expect(browser).toHaveText('Enter a name for your form')
 
     await $('#title').addValue('My new form')
     await $('button[type="submit"]').click()
