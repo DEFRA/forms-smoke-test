@@ -2,6 +2,7 @@ import { browser, expect } from '@wdio/globals'
 
 import nameEntryPage from '../page-objects/name.page'
 import emailPage from '../page-objects/email.page'
+import phoneNumberPage from '../page-objects/phone-number.page'
 
 describe('Register unicorn breeder form - e2e', () => {
   before(async () => {
@@ -25,6 +26,15 @@ describe('Register unicorn breeder form - e2e', () => {
     await emailPage.submitButton.click()
     await expect(browser).toHaveTitle(
       `What's your phone number? - e2e form - GOV.UK`
+    )
+  })
+
+  it('should enter phone number', async () => {
+    await phoneNumberPage.enterPhoneNumber.setValue('07779875')
+
+    await phoneNumberPage.submitButton.click()
+    await expect(browser).toHaveTitle(
+      `What's your address? - e2e form - GOV.UK`
     )
   })
 })
