@@ -4,6 +4,7 @@ import nameEntryPage from '../page-objects/name.page.js'
 import emailPage from '../page-objects/email.page.js'
 import phoneNumberPage from '../page-objects/phone-number.page.js'
 import addressPage from '../page-objects/address.page.js'
+import certificateAddressPage from '../page-objects/certificate-address.page.js'
 
 describe('Register unicorn breeder form - e2e', () => {
   before(async () => {
@@ -46,7 +47,16 @@ describe('Register unicorn breeder form - e2e', () => {
 
     await addressPage.submitButton.click()
     await expect(browser).toHaveTitle(
-      `Do you want your unicorn breeder certificate sent to this address?`
+      `Do you want your unicorn breeder certificate sent to this address? - e2e form - GOV.UK`
+    )
+  })
+
+  it('should select Yes to use same address for certificate', async () => {
+    await certificateAddressPage.selectYesOrNo.click()
+
+    await certificateAddressPage.submitButton.click()
+    await expect(browser).toHaveTitle(
+      `When does your unicorn insurance policy start? - e2e form - GOV.UK`
     )
   })
 })
