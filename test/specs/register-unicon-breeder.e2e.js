@@ -1,8 +1,8 @@
 import { browser, expect } from '@wdio/globals'
 
-import nameEntryPage from '../page-objects/name.page'
-import emailPage from '../page-objects/email.page'
-import phoneNumberPage from '../page-objects/phone-number.page'
+import nameEntryPage from '../page-objects/name.page.js'
+import emailPage from '../page-objects/email.page.js'
+import phoneNumberPage from '../page-objects/phone-number.page.js'
 
 describe('Register unicorn breeder form - e2e', () => {
   before(async () => {

@@ -1,12 +1,12 @@
-import { Page } from 'page-objects/page'
+import { Page } from './page.js'
 
 class PhoneNumberPage extends Page {
   get enterPhoneNumber() {
-    return $('input[type="tel"]')
+    return $(`aria/What's your phone number?`)
   }
 
   get submitButton() {
-    return $('#submit')
+    return $('aria/Continue')
   }
 }
 

@@ -1,12 +1,12 @@
-import { Page } from 'page-objects/page'
+import { Page } from './page.js'
 
 class NamePage extends Page {
   get enterName() {
-    return $('#textField')
+    return $(`aria/What's your name?`)
   }
 
   get submitButton() {
-    return $('#submit')
+    return $('aria/Continue')
   }
 }
 

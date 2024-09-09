@@ -1,12 +1,12 @@
-import { Page } from 'page-objects/page'
+import { Page } from './page.js'
 
 class EmailPage extends Page {
   get enterEmail() {
-    return $('input[type="email"]')
+    return $(`aria/What's your email address?`)
   }
 
   get submitButton() {
-    return $('#submit')
+    return $('aria/Continue')
   }
 }
 
