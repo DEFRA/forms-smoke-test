@@ -2,11 +2,19 @@ import { Page } from './page.js'
 
 class AddressPage extends Page {
   get enterAddressLine1() {
-    return $('aria/Address Line 1')
+    return $('aria/Address line 1')
+  }
+
+  get enterTown() {
+    return $('aria/Town or city')
+  }
+
+  get enterPostcode() {
+    return $('aria/Postcode')
   }
 
   get submitButton() {
-    return $('button[type="Submit"]')
+    return $('aria/Continue')
   }
 }
 

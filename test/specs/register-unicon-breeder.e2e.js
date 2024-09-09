@@ -3,6 +3,7 @@ import { browser, expect } from '@wdio/globals'
 import nameEntryPage from '../page-objects/name.page.js'
 import emailPage from '../page-objects/email.page.js'
 import phoneNumberPage from '../page-objects/phone-number.page.js'
+import addressPage from '../page-objects/address.page.js'
 
 describe('Register unicorn breeder form - e2e', () => {
   before(async () => {
@@ -35,6 +36,17 @@ describe('Register unicorn breeder form - e2e', () => {
     await phoneNumberPage.submitButton.click()
     await expect(browser).toHaveTitle(
       `What's your address? - e2e form - GOV.UK`
+    )
+  })
+
+  it('should enter address', async () => {
+    await addressPage.enterAddressLine1.setValue('1 High Street')
+    await addressPage.enterTown.setValue('Townsville')
+    await addressPage.enterPostcode.setValue('TS1 1ST')
+
+    await addressPage.submitButton.click()
+    await expect(browser).toHaveTitle(
+      `Do you want your unicorn breeder certificate sent to this address?`
     )
   })
 })
