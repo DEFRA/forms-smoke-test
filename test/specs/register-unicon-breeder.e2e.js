@@ -1,10 +1,14 @@
 import { browser, expect } from '@wdio/globals'
+import path from 'path'
 
 import nameEntryPage from '../page-objects/name.page.js'
 import emailPage from '../page-objects/email.page.js'
 import phoneNumberPage from '../page-objects/phone-number.page.js'
 import addressPage from '../page-objects/address.page.js'
 import certificateAddressPage from '../page-objects/certificate-address.page.js'
+import policyStartDatePage from '../page-objects/policy-start-date.page.js'
+import uploadFilePage from '../page-objects/upload-file.page.js'
+import selectNoOfUnicornsPage from '../page-objects/select-no-of-unicorns.page.js'
 
 describe('Register unicorn breeder form - e2e', () => {
   before(async () => {
@@ -47,7 +51,7 @@ describe('Register unicorn breeder form - e2e', () => {
 
     await addressPage.submitButton.click()
     await expect(browser).toHaveTitle(
-      `Do you want your unicorn breeder certificate sent to this address? - e2e form - GOV.UK`
+      'Do you want your unicorn breeder certificate sent to this address? - e2e form - GOV.UK'
     )
   })
 
@@ -56,7 +60,61 @@ describe('Register unicorn breeder form - e2e', () => {
 
     await certificateAddressPage.submitButton.click()
     await expect(browser).toHaveTitle(
-      `When does your unicorn insurance policy start? - e2e form - GOV.UK`
+      'When does your unicorn insurance policy start? - e2e form - GOV.UK'
+    )
+  })
+
+  it('should enter policy start date', async () => {
+    await policyStartDatePage.enterDay.setValue('01')
+    await policyStartDatePage.enterMonth.setValue('02')
+    await policyStartDatePage.enterYear.setValue('2024')
+
+    await policyStartDatePage.submitButton.click()
+    await expect(browser).toHaveTitle(
+      'Upload your insurance certificate - e2e form - GOV.UK'
+    )
+  })
+
+  it('should upload file', async () => {
+    const filePath = path.resolve('./test/file/test-file.txt')
+    await uploadFilePage.chooseFile.setValue(filePath)
+    await uploadFilePage.uploadFile.click()
+
+    const link = await uploadFilePage.refreshPage
+
+    // await browser.waitUntil(
+    //   async function () {
+    //     return (
+    //       (await link.getText()) ===
+    //       'Refresh page to update file upload progress'
+    //     )
+    //   },
+    //   {
+    //     timeout: 5000,
+    //     timeoutMsg: 'expected text to be different after 5s'
+    //   }
+    // )
+
+    // await browser.pause(200)
+    await expect(link).toHaveText('Refresh page to update file upload progress')
+
+    await link.click()
+
+    // await expect(browser).toHaveClipboardText('Uploaded')
+    // await uploadFilePage.submitButton.waitForDisplayed({ timeout: 3000 })
+
+    await uploadFilePage.submitButton.click()
+    await expect(browser).toHaveTitle(
+      `How many unicorns do you expect to breed each year? - e2e form - GOV.UK`
+    )
+  })
+
+  it('should select Yes to use same address for certificate', async () => {
+    await selectNoOfUnicornsPage.select1to5.click()
+
+    await selectNoOfUnicornsPage.submitButton.click()
+    await expect(browser).toHaveTitle(
+      'What type of unicorns will you breed? - e2e form - GOV.UK'
     )
   })
 })
