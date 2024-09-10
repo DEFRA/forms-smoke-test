@@ -9,6 +9,9 @@ import certificateAddressPage from '../page-objects/certificate-address.page.js'
 import policyStartDatePage from '../page-objects/policy-start-date.page.js'
 import uploadFilePage from '../page-objects/upload-file.page.js'
 import selectNoOfUnicornsPage from '../page-objects/select-no-of-unicorns.page.js'
+import selectTypeOfUnicornsPage from '../page-objects/select-type-of-unicorns.page.js'
+import unicornsTextPage from '../page-objects/unicorns-text.page.js'
+import noOfUnicornsStaffPage from '../page-objects/no-of-unicorns-staff.page.js'
 
 describe('Register unicorn breeder form - e2e', () => {
   before(async () => {
@@ -109,12 +112,40 @@ describe('Register unicorn breeder form - e2e', () => {
     )
   })
 
-  it('should select Yes to use same address for certificate', async () => {
+  it('should select how many unicorns', async () => {
     await selectNoOfUnicornsPage.select1to5.click()
 
     await selectNoOfUnicornsPage.submitButton.click()
     await expect(browser).toHaveTitle(
       'What type of unicorns will you breed? - e2e form - GOV.UK'
     )
+  })
+
+  it('should select type of unicorns', async () => {
+    await selectTypeOfUnicornsPage.selectFlying.click()
+    await selectTypeOfUnicornsPage.selectAquatic.click()
+
+    await selectTypeOfUnicornsPage.submitButton.click()
+    await expect(browser).toHaveTitle(
+      'Where will you keep the unicorns? - e2e form - GOV.UK'
+    )
+  })
+
+  it('should enter where you will keep unicorns', async () => {
+    await unicornsTextPage.enterWhereYouKeepUnicorn.setValue(
+      'unicorns are kept in the garden'
+    )
+
+    await unicornsTextPage.submitButton.click()
+    await expect(browser).toHaveTitle(
+      'How many members of staff will look after the unicorns? - e2e form - GOV.UK'
+    )
+  })
+
+  it('should enter no of unicorns staff', async () => {
+    await noOfUnicornsStaffPage.enterNoOfUnicornStaff.setValue('5')
+
+    await noOfUnicornsStaffPage.submitButton.click()
+    await expect(browser).toHaveTitle('Summary - e2e form - GOV.UK')
   })
 })
