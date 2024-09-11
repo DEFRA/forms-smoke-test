@@ -161,7 +161,7 @@ export const config = {
   mochaOpts: {
     ui: 'bdd',
     timeout: debug ? oneHour : 60000
-  }
+  },
   //
   // =====
   // Hooks
@@ -250,19 +250,19 @@ export const config = {
    * @param {boolean} result.passed    true if test has passed, otherwise false
    * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
    */
-  // afterTest: async function (
-  //   test,
-  //   context,
-  //   { error, result, duration, passed, retries }
-  // ) {
-  //   await browser.takeScreenshot()
+  afterTest: async function (
+    test,
+    context,
+    { error, result, duration, passed, retries }
+  ) {
+    await browser.takeScreenshot()
 
-  //   if (error) {
-  //     browser.executeScript(
-  //       'browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "At least 1 assertion failed"}}'
-  //     )
-  //   }
-  // },
+    if (error) {
+      browser.executeScript(
+        'browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "At least 1 assertion failed"}}'
+      )
+    }
+  },
 
   /**
    * Hook that gets executed after the suite has ended
@@ -300,25 +300,25 @@ export const config = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  // onComplete: function (exitCode, config, capabilities, results) {
-  //   const reportError = new Error('Could not generate Allure report')
-  //   const generation = allure(['generate', 'allure-results', '--clean'])
+  onComplete: function (exitCode, config, capabilities, results) {
+    const reportError = new Error('Could not generate Allure report')
+    const generation = allure(['generate', 'allure-results', '--clean'])
 
-  //   return new Promise((resolve, reject) => {
-  //     const generationTimeout = setTimeout(() => reject(reportError), oneMinute)
+    return new Promise((resolve, reject) => {
+      const generationTimeout = setTimeout(() => reject(reportError), oneMinute)
 
-  //     generation.on('exit', function (exitCode) {
-  //       clearTimeout(generationTimeout)
+      generation.on('exit', function (exitCode) {
+        clearTimeout(generationTimeout)
 
-  //       if (exitCode !== 0) {
-  //         return reject(reportError)
-  //       }
+        if (exitCode !== 0) {
+          return reject(reportError)
+        }
 
-  //       allure(['open'])
-  //       resolve()
-  //     })
-  //   })
-  // }
+        allure(['open'])
+        resolve()
+      })
+    })
+  }
 
   /**
    * Gets executed when a refresh happens.
