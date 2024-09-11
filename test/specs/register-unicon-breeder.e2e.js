@@ -12,8 +12,10 @@ import selectNoOfUnicornsPage from '../page-objects/select-no-of-unicorns.page.j
 import selectTypeOfUnicornsPage from '../page-objects/select-type-of-unicorns.page.js'
 import unicornsTextPage from '../page-objects/unicorns-text.page.js'
 import noOfUnicornsStaffPage from '../page-objects/no-of-unicorns-staff.page.js'
+import summaryPage from '../page-objects/summary.page.js'
 
 describe('Register unicorn breeder form - e2e', () => {
+  // eslint-disable-next-line no-undef
   before(async () => {
     await browser.url('/preview/draft/e2e-form/whats-your-name')
   })
@@ -83,28 +85,21 @@ describe('Register unicorn breeder form - e2e', () => {
     await uploadFilePage.chooseFile.setValue(filePath)
     await uploadFilePage.uploadFile.click()
 
-    const link = await uploadFilePage.refreshPage
+    let fileUploaded = true
 
-    // await browser.waitUntil(
-    //   async function () {
-    //     return (
-    //       (await link.getText()) ===
-    //       'Refresh page to update file upload progress'
-    //     )
-    //   },
-    //   {
-    //     timeout: 5000,
-    //     timeoutMsg: 'expected text to be different after 5s'
-    //   }
-    // )
+    while (fileUploaded) {
+      const inLink = await uploadFilePage.refreshPage
 
-    // await browser.pause(200)
-    await expect(link).toHaveText('Refresh page to update file upload progress')
+      await inLink.click()
+      const uploadedFileElem = await uploadFilePage.checkForUploadedFile
 
-    await link.click()
+      if (await uploadedFileElem.isExisting()) {
+        fileUploaded = false
+      }
+    }
 
-    // await expect(browser).toHaveClipboardText('Uploaded')
-    // await uploadFilePage.submitButton.waitForDisplayed({ timeout: 3000 })
+    const uploadedElem = await uploadFilePage.checkForUploadedFile
+    await expect(uploadedElem).toBeDisplayed()
 
     await uploadFilePage.submitButton.click()
     await expect(browser).toHaveTitle(
@@ -147,5 +142,13 @@ describe('Register unicorn breeder form - e2e', () => {
 
     await noOfUnicornsStaffPage.submitButton.click()
     await expect(browser).toHaveTitle('Summary - e2e form - GOV.UK')
+  })
+
+  it('should check summary page and submit form', async () => {
+    await summaryPage.summary.isExisting()
+    await summaryPage.contactDetails.isExisting()
+
+    await summaryPage.submitButton.click()
+    await expect(browser).toHaveTitle('Form submitted - e2e form - GOV.UK')
   })
 })
