@@ -1,14 +1,14 @@
 {
-    "compilerOptions": {
-        "types": ["node", "@wdio/globals/types", "@wdio/mocha-framework"],
-        "allowJs": true,
-        "module": "NodeNext",
-        "noEmit": true,
-        "paths": {
-        "~/*": ["./*"]
-        },
-        "resolveJsonModule": true
+  "compilerOptions": {
+    "types": ["node", "@wdio/globals/types", "@wdio/mocha-framework"],
+    "allowJs": true,
+    "module": "NodeNext",
+    "noEmit": true,
+    "paths": {
+      "~/*": ["./*"]
     },
-    "exclude": [".cache", ".public", ".server", "node_modules"],
-    "include": ["**/*.cjs", "**/*.js"]
+    "resolveJsonModule": true
+  },
+  "exclude": [".cache", ".public", ".server", "node_modules"],
+  "include": ["**/*.cjs", "**/*.js"]
 }

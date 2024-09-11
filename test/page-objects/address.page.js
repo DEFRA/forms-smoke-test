@@ -1,4 +1,5 @@
 import { Page } from './page.js'
+import { $ } from '@wdio/globals'
 
 class AddressPage extends Page {
   get enterAddressLine1() {

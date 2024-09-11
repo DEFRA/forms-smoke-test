@@ -1,4 +1,5 @@
 import { Page } from './page.js'
+import { $ } from '@wdio/globals'
 
 class NamePage extends Page {
   get enterName() {

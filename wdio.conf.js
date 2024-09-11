@@ -1,3 +1,5 @@
+import { browser } from '@wdio/globals'
+
 const debug = process.env.DEBUG
 const oneHour = 60 * 60 * 1000
 

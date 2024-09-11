@@ -1,4 +1,5 @@
 import { Page } from './page.js'
+import { $ } from '@wdio/globals'
 
 class SelectTypeOfUnicornsPage extends Page {
   get selectFlying() {

@@ -1,4 +1,5 @@
 import allure from 'allure-commandline'
+import { browser } from '@wdio/globals'
 
 const debug = process.env.DEBUG
 const oneMinute = 60 * 1000

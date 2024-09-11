@@ -1,4 +1,4 @@
-import { browser, expect } from '@wdio/globals'
+import { browser, expect, $ } from '@wdio/globals'
 
 import FormPage from '../page-objects/FormsRunner.page.js'
 
