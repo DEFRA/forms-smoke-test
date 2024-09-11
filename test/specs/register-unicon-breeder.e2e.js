@@ -1,4 +1,5 @@
 import { browser, expect } from '@wdio/globals'
+import { before } from 'mocha'
 import path from 'path'
 
 import nameEntryPage from '../page-objects/name.page.js'
@@ -15,7 +16,6 @@ import noOfUnicornsStaffPage from '../page-objects/no-of-unicorns-staff.page.js'
 import summaryPage from '../page-objects/summary.page.js'
 
 describe('Register unicorn breeder form - e2e', () => {
-  // eslint-disable-next-line no-undef
   before(async () => {
     await browser.url('/preview/draft/e2e-form/whats-your-name')
   })
