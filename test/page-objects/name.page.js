@@ -1,7 +1,11 @@
 import { Page } from './page.js'
-import { $ } from '@wdio/globals'
+import { $, browser } from '@wdio/globals'
 
 class NamePage extends Page {
+  open() {
+    return browser.url('/preview/draft/e2e-form/whats-your-name')
+  }
+
   get enterName() {
     return $(`aria/What's your name?`)
   }
