@@ -48,9 +48,11 @@ describe('Register unicorn breeder form - e2e', () => {
   })
 
   it('should enter address', async () => {
-    await addressPage.enterAddressLine1.setValue('1 High Street')
-    await addressPage.enterTown.setValue('Townsville')
-    await addressPage.enterPostcode.setValue('TS1 1ST')
+    await Promise.all([
+      addressPage.enterAddressLine1.setValue('1 High Street'),
+      addressPage.enterTown.setValue('Townsville'),
+      addressPage.enterPostcode.setValue('TS1 1ST')
+    ])
     await addressPage.submitButton.click()
 
     await expect(browser).toHaveTitle(
@@ -68,9 +70,12 @@ describe('Register unicorn breeder form - e2e', () => {
   })
 
   it('should enter policy start date', async () => {
-    await policyStartDatePage.enterDay.setValue('01')
-    await policyStartDatePage.enterMonth.setValue('02')
-    await policyStartDatePage.enterYear.setValue('2024')
+    await Promise.all([
+      policyStartDatePage.enterDay.setValue('01'),
+      policyStartDatePage.enterMonth.setValue('02'),
+      policyStartDatePage.enterYear.setValue('2024')
+    ])
+
     await policyStartDatePage.submitButton.click()
 
     await expect(browser).toHaveTitle(
