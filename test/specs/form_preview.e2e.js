@@ -8,14 +8,14 @@ describe('Forms Preview', () => {
     await expect(browser).toHaveTitle(
       'Page one - Do not use - Used for Automated Tests - GOV.UK'
     )
-    const elem = await $('[type="text"]')
+    const elem = $('[type="text"]')
     await elem.setValue('some text')
-    const submitButton = await $('button=Continue')
+    const submitButton = $('button=Continue')
     await submitButton.click()
     await expect(browser).toHaveTitle(
       'Summary - Do not use - Used for Automated Tests - GOV.UK'
     )
-    const sendButton = await $('button=Send')
+    const sendButton = $('button=Send')
     await sendButton.click()
     await expect(browser).toHaveTitle(
       'Form submitted - Do not use - Used for Automated Tests - GOV.UK'

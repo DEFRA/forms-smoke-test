@@ -4,7 +4,13 @@ module.exports = {
     node: true,
     jest: true
   },
-  ignorePatterns: ['.server', '.public', 'src/__fixtures__', 'coverage'],
+  ignorePatterns: [
+    '.server',
+    '.public',
+    'src/__fixtures__',
+    'coverage',
+    '*.conf.js'
+  ],
   overrides: [
     {
       extends: [
@@ -12,14 +18,18 @@ module.exports = {
         'eslint:recommended',
         'plugin:import/recommended',
         'plugin:import/typescript',
+        'plugin:@typescript-eslint/strict-type-checked',
+        'plugin:@typescript-eslint/stylistic-type-checked',
         'plugin:n/recommended',
         'plugin:promise/recommended',
         'prettier'
       ],
       files: ['**/*.js'],
+      parser: '@typescript-eslint/parser',
       parserOptions: {
         ecmaVersion: 'latest',
-        sourceType: 'module'
+        projectService: true,
+        tsconfigRootDir: __dirname
       },
       plugins: ['import', 'n', 'promise', 'prettier'],
       rules: {
@@ -33,7 +43,8 @@ module.exports = {
         'n/no-extraneous-require': 'off',
         'n/no-extraneous-import': 'off',
         'n/no-missing-require': 'off',
-        'n/no-missing-import': 'off'
+        'n/no-missing-import': 'off',
+        '@typescript-eslint/no-unsafe-argument': 'off'
       },
       settings: {
         'import/resolver': {
