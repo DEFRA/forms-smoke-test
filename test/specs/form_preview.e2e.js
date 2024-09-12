@@ -1,6 +1,6 @@
 import { browser, expect, $ } from '@wdio/globals'
 
-import FormPage from '../page-objects/FormsRunner.page.js'
+import FormPage from '~/test/page-objects/FormsRunner.page.js'
 
 describe('Forms Preview', () => {
   it('Should preview a form in the runner ', async () => {

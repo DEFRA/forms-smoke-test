@@ -1,4 +1,4 @@
-import { Page } from './page.js'
+import { Page } from '~/test/page-objects/page.js'
 import { $ } from '@wdio/globals'
 
 class CertificateAddressPage extends Page {

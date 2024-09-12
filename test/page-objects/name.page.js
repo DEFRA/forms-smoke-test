@@ -1,4 +1,4 @@
-import { Page } from './page.js'
+import { Page } from '~/test/page-objects/page.js'
 import { $, browser } from '@wdio/globals'
 
 class NamePage extends Page {
