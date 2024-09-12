@@ -15,9 +15,7 @@
       {
         "root": ["./"],
         "alias": {
-          "~": ".",
-          "page-objects": "./test/page-objects",
-          "components": "./test/components"
+          "~": "."
         }
       }
     ]

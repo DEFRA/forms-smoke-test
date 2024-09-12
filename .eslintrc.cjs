@@ -1,59 +1,46 @@
 module.exports = {
   env: {
-    browser: true,
-    commonjs: true,
     es2022: true,
     node: true,
-    jest: true,
-    'jest/globals': true
+    jest: true
   },
-  extends: [
-    'standard',
-    'prettier',
-    'plugin:import/recommended',
-    'plugin:jest-formatting/recommended',
-    'plugin:n/recommended',
-    'plugin:promise/recommended'
-  ],
+  ignorePatterns: ['.server', '.public', 'src/__fixtures__', 'coverage'],
   overrides: [
     {
-      files: ['**/*.cjs'],
+      extends: [
+        'standard',
+        'eslint:recommended',
+        'plugin:import/recommended',
+        'plugin:import/typescript',
+        'plugin:n/recommended',
+        'plugin:promise/recommended',
+        'prettier'
+      ],
+      files: ['**/*.js'],
       parserOptions: {
-        sourceType: 'commonjs'
+        ecmaVersion: 'latest',
+        sourceType: 'module'
+      },
+      plugins: ['import', 'mocha', 'n', 'promise', 'prettier'],
+      rules: {
+        'import/extensions': 'off',
+        'import/default': 'off',
+        'import/namespace': 'off',
+        'import/no-named-as-default': 'off',
+        'import/no-named-as-default-member': 'off',
+        'import/no-unresolved': 'off',
+        'import/no-duplicates': 'off',
+        'n/no-extraneous-require': 'off',
+        'n/no-extraneous-import': 'off',
+        'n/no-missing-require': 'off',
+        'n/no-missing-import': 'off'
+      },
+      settings: {
+        'import/resolver': {
+          node: true,
+          typescript: true
+        }
       }
-    },
-    {
-      files: ['**/*.test.js'],
-      plugins: ['jest'],
-      extends: ['plugin:jest/recommended', 'plugin:jest-formatting/recommended']
     }
-  ],
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module'
-  },
-  plugins: ['import', 'jest', 'jest-formatting', 'n', 'promise', 'prettier'],
-  rules: {
-    'prettier/prettier': 'error',
-    'no-console': 'error',
-
-    // Check for mandatory file extensions
-    // https://nodejs.org/api/esm.html#mandatory-file-extensions
-    'import/extensions': ['error', 'ignorePackages'],
-
-    // Skip rules handled by TypeScript compiler
-    'import/default': 'off',
-    'import/namespace': 'off',
-    'n/no-extraneous-require': 'off',
-    'n/no-extraneous-import': 'off',
-    'n/no-missing-require': 'off',
-    'n/no-missing-import': 'off'
-  },
-  settings: {
-    'import/resolver': {
-      node: true,
-      typescript: true
-    }
-  },
-  ignorePatterns: ['.server', '.public', 'src/__fixtures__', 'coverage']
+  ]
 }

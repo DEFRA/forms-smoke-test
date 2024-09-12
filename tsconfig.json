@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "types": ["node", "@wdio/globals/types", "@wdio/mocha-framework"],
+    "checkJs": true,
     "allowJs": true,
+    "strict": true,
+    "target": "es2022",
+    "baseUrl": "./",
     "module": "NodeNext",
     "noEmit": true,
     "paths": {
@@ -10,5 +14,11 @@
     "resolveJsonModule": true
   },
   "exclude": [".cache", ".public", ".server", "node_modules"],
-  "include": ["**/*.cjs", "**/*.js"]
+  "include": [
+    "**/*.cjs",
+    "**/*.js",
+    ".eslintrc.*",
+    ".prettierrc.*",
+    ".lintstagedrc.*"
+  ]
 }

@@ -1,4 +1,4 @@
-import { Page } from './page.js'
+import { Page } from '~/test/page-objects/FormsRunner.page.js'
 
 class HomePage extends Page {
   open() {
