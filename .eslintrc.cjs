@@ -21,7 +21,7 @@ module.exports = {
         ecmaVersion: 'latest',
         sourceType: 'module'
       },
-      plugins: ['import', 'mocha', 'n', 'promise', 'prettier'],
+      plugins: ['import', 'n', 'promise', 'prettier'],
       rules: {
         'import/extensions': 'off',
         'import/default': 'off',
