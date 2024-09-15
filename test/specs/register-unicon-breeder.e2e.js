@@ -150,6 +150,9 @@ describe('Register unicorn breeder form - e2e', () => {
   it('should check summary page and submit form', async () => {
     await summaryPage.summary.isExisting()
     await summaryPage.contactDetails.isExisting()
+
+    await expect(summaryPage.mainContent).toMatchSnapshot()
+
     await summaryPage.submitButton.click()
 
     await expect(browser).toHaveTitle('Form submitted - e2e form - GOV.UK')

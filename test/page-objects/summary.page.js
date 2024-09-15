@@ -10,6 +10,10 @@ class SummaryPage extends Page {
     return $('aria/Contact details')
   }
 
+  get mainContent() {
+    return $('#main-content')
+  }
+
   get submitButton() {
     return $('aria/Send')
   }
