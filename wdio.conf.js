@@ -1,3 +1,5 @@
+import { browser } from '@wdio/globals'
+
 const debug = process.env.DEBUG
 const oneHour = 60 * 60 * 1000
 
@@ -161,7 +163,8 @@ export const config = {
   // See the full list at http://mochajs.org/
   mochaOpts: {
     ui: 'bdd',
-    timeout: debug ? oneHour : 60000
+    timeout: debug ? oneHour : 60000,
+    bail: true
   },
   //
   // =====
