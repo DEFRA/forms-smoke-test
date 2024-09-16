@@ -151,7 +151,7 @@ describe('Register unicorn breeder form - e2e', () => {
     await summaryPage.summary.isExisting()
     await summaryPage.contactDetails.isExisting()
 
-    await expect(summaryPage.mainContent).toMatchSnapshot()
+    await expect(summaryPage.summaryList).toMatchSnapshot()
 
     await summaryPage.submitButton.click()
 

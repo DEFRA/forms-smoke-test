@@ -10,8 +10,8 @@ class SummaryPage extends Page {
     return $('aria/Contact details')
   }
 
-  get mainContent() {
-    return $('#main-content')
+  get summaryList() {
+    return $('.govuk-summary-list')
   }
 
   get submitButton() {
