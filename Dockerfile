@@ -9,11 +9,11 @@ RUN apk add --no-cache \
     curl \
     aws-cli
 
+USER node
+
 WORKDIR /home/node/test
 
 COPY --chown=node:node . .
-
-USER node
 
 RUN npm install
 
