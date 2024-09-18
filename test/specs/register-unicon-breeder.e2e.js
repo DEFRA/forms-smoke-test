@@ -13,7 +13,9 @@ import selectTypeOfUnicornsPage from '~/test/page-objects/select-type-of-unicorn
 import unicornsTextPage from '~/test/page-objects/unicorns-text.page.js'
 import noOfUnicornsStaffPage from '~/test/page-objects/no-of-unicorns-staff.page.js'
 import summaryPage from '~/test/page-objects/summary.page.js'
-import { resolve } from 'node:path'
+import path from 'path'
+
+const __dirname = path.resolve()
 
 describe('Register unicorn breeder form - e2e', () => {
   before(async () => {
@@ -84,8 +86,9 @@ describe('Register unicorn breeder form - e2e', () => {
   })
 
   it('should upload file', async () => {
-    const filePath = resolve(import.meta.dirname, '../file/test-file.txt')
-    await uploadFilePage.chooseFile.setValue(filePath)
+    const filePath = path.join(__dirname, 'test/file/test-file.txt')
+    const remoteFilePath = browser.uploadFile(filePath)
+    await uploadFilePage.chooseFile.setValue(await remoteFilePath)
     await uploadFilePage.uploadFile.click()
 
     let fileUploaded = true

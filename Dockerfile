@@ -11,7 +11,7 @@ RUN apk add --no-cache \
 
 USER node
 
-WORKDIR /home/node/test
+WORKDIR /home/node/app
 
 COPY --chown=node:node . .
 
