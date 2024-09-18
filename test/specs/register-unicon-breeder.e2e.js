@@ -1,6 +1,5 @@
 import { browser, expect } from '@wdio/globals'
 import { before } from 'mocha'
-import path from 'path'
 
 import nameEntryPage from '~/test/page-objects/name.page.js'
 import emailPage from '~/test/page-objects/email.page.js'
@@ -14,9 +13,7 @@ import selectTypeOfUnicornsPage from '~/test/page-objects/select-type-of-unicorn
 import unicornsTextPage from '~/test/page-objects/unicorns-text.page.js'
 import noOfUnicornsStaffPage from '~/test/page-objects/no-of-unicorns-staff.page.js'
 import summaryPage from '~/test/page-objects/summary.page.js'
-
-const TEST_UPLOAD_FILE_LOCATION =
-  process.env.TEST_UPLOAD_FILE_LOCATION ?? './test/file/test-file.txt'
+import { resolve } from 'node:path'
 
 describe('Register unicorn breeder form - e2e', () => {
   before(async () => {
@@ -87,9 +84,8 @@ describe('Register unicorn breeder form - e2e', () => {
   })
 
   it('should upload file', async () => {
-    await uploadFilePage.chooseFile.setValue(
-      path.resolve(TEST_UPLOAD_FILE_LOCATION)
-    )
+    const filePath = resolve(import.meta.dirname, '../file/test-file.txt')
+    await uploadFilePage.chooseFile.setValue(filePath)
     await uploadFilePage.uploadFile.click()
 
     let fileUploaded = true
