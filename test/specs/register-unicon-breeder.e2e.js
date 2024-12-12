@@ -31,8 +31,18 @@ describe('Register unicorn breeder form - e2e', () => {
       `What's your email address? - e2e form - GOV.UK`
     )
   })
+  
+  it('should show error message when incorrect format', async () => {
+    await emailPage.enterEmail.setValue('incorrect email format')
+    await emailPage.submitButton.click()
+    await expect(browser).toHaveTitle(
+      `Error: What's your email address? - e2e form - GOV.UK`
+    )
+    await expect(emailPage.emailInvalidErrorMessage).toHaveText('Enter email adress in the correct format')
+  })
 
   it('should enter email address', async () => {
+    await expect (emailPage.emailHintText).toHaveText('This is an email address. An email address must contain an at sign @')
     await emailPage.enterEmail.setValue('john.doe@example.co.uk')
     await emailPage.submitButton.click()
     await expect(browser).toHaveTitle(
