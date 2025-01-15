@@ -3,6 +3,10 @@ import { config as baseConfig } from './wdio.conf.js'
 export const config = {
   ...baseConfig,
 
+  hostname: 'hub.browserstack.com',
+  port: 443,
+  protocol: 'https',
+
   user: process.env.BROWSERSTACK_USER,
   key: process.env.BROWSERSTACK_KEY,
 
