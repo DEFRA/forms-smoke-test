@@ -1,4 +1,4 @@
-Feature: DxT Froms - Acceptance Tests
+Feature: DxT Forms - Acceptance Tests
 
     Scenario: Log in
         Given I'm a user with permissions
@@ -14,7 +14,7 @@ Feature: DxT Froms - Acceptance Tests
         And I can filter a form
 
     Scenario: Create a draft form
-        Given I'm logg in
+        Given I'm log in
         When Create a new draft form
         And add a page
         Then a draft form is created successfully
@@ -27,7 +27,7 @@ Feature: DxT Froms - Acceptance Tests
 
     Scenario: Publish a form
         Given I have a draft form
-        And add mandatory form metatdata
+        And add mandatory form metadata
         When I publish the form
         Then form is promoted to live
         And draft is removed
@@ -80,47 +80,47 @@ Feature: DxT Froms - Acceptance Tests
         Then the order is updated
 
     Scenario: Forms submission Email
-        Given A form has a draft and outout email set
+        Given A form has a draft and output email set
         When form is submitted
         Then Output email is sent
         And the email is displayed correctly
         And CSV containing form data can be downloaded
         And CSV contains the correct data
 
-    Scenario: Forms submission emaill with File Upload mandatory
-        Given A form has a draft form and outout email set
-        And the form has a file upload mandaoty component
+    Scenario: Forms submission email with File Upload mandatory
+        Given A form has a draft form and output email set
+        And the form has a file upload mandatory component
         When form is submitted
         Then Output email is sent
         And the email is displayed correctly
-        And attached file can be dowmloaded
+        And attached file can be downloaded
         And has correct data in the csv
 
-    Scenario: Forms submission emaill with Add Another mandatory
+    Scenario: Forms submission email with Add Another mandatory
         Given A form has a draft form and outout email set
-        And the form has a Add Another mandaoty component
+        And the form has a Add Another mandatory component
         When form is submitted
         Then Output email is sent
         And the email is displayed correctly
-        And Add another CSV file can be dowmloaded
+        And Add another CSV file can be downloaded
         And has correct data in the csv
 
-    Scenario: Forms submission emaill with File Upload optional
-        Given A form has a draft form and outout email set
-        And the form has a file upload mandaoty component
+    Scenario: Forms submission email with File Upload optional
+        Given A form has a draft form and output email set
+        And the form has a file upload mandatory component
         When form is submitted
         Then Output email is sent
         And the email is displayed correctly
-        And attached file can be dowmloaded
+        And attached file can be downloaded
         And has correct data in the csv
 
-    Scenario: Forms submission emaill with Add Another optional
-        Given A form has a draft form and outout email set
-        And the form has a Add Another mandaoty component
+    Scenario: Forms submission email with Add Another optional
+        Given A form has a draft form and output email set
+        And the form has a Add Another mandatory component
         When form is submitted
         Then Output email is sent
         And the email is displayed correctly
-        And Add another CSV file can be dowmloaded
+        And Add another CSV file can be downloaded
         And has correct data in the csv
 
     Scenario Outline: Create condition
@@ -134,7 +134,3 @@ Feature: DxT Froms - Acceptance Tests
             | number    | less than | 18     |
             | Yes/No    | is        | Yes    |
             | Checkbox  | banana    | banana |
-
-
-
-
