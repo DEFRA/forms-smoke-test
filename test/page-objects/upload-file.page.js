@@ -14,10 +14,6 @@ class UploadFilePage extends Page {
     return $('aria/Uploaded')
   }
 
-  get refreshPage() {
-    return $('=Refresh page to update file upload progress')
-  }
-
   get submitButton() {
     return $('aria/Continue')
   }
