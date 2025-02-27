@@ -94,9 +94,6 @@ describe('Register unicorn breeder form - e2e', () => {
     let fileUploaded = true
 
     while (fileUploaded) {
-      const inLink = uploadFilePage.refreshPage
-
-      await inLink.click()
       const uploadedFileElem = uploadFilePage.checkForUploadedFile
 
       if (await uploadedFileElem.isExisting()) {
