@@ -9,6 +9,14 @@ class EmailPage extends Page {
   get submitButton() {
     return $('aria/Continue')
   }
+
+  get emailInvalidErrorMessage(){
+    return $('aria/Enter email adress in the correct format')
+  }
+
+  get emailHintText(){
+    return $('aria/This is an email address. An email address must contain an at sign @')
+  }
 }
 
 export default new EmailPage()
