@@ -16,3 +16,5 @@ coverage
 local.log
 logs/
 browserstack.err
+log/usage.log
+log/usage-debug.log

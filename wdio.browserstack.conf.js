@@ -24,7 +24,47 @@ export const config = {
         os: 'Windows',
         osVersion: '10'
       }
+    },
+    {
+      "browserName" : "Safari",
+      'bstack:options' : {
+        "os" : "OS X",
+        "osVersion" : "Mojave",
+        "browserVersion" : "12.1"
+      }
+     }, 
+     {
+      "browserName" : "Safari",
+      'bstack:options' : {
+        "os" : "OS X",
+        "osVersion" : "Sequoia",
+        "browserVersion" : "18.1"
+     }
+   },    
+     {
+      "browserName" : "Edge",
+      'bstack:options' : {
+        "os" : "Windows",
+        "osVersion" : "11",
+        "browserVersion" : "latest"
+     }
+   },
+   {
+    "browserName" : "Edge",
+    'bstack:options' : {
+      "os" : "Windows",
+      "osVersion" : "10",
+      "browserVersion" : "110.0"
     }
+  },
+  {
+    "browserName" : "Firefox",
+    'bstack:options' : {
+      "os" : "Windows",
+      "osVersion" : "10",
+      "browserVersion" : "132.0"
+   }
+ }
   ],
 
   services: [
@@ -36,7 +76,7 @@ export const config = {
           user: process.env.BROWSERSTACK_USER,
           key: process.env.BROWSERSTACK_KEY,
           projectName: 'forms-smoke-test',
-          buildName: 'browserstack-build-1'
+          buildName: 'Forms Smoke test with main browsers'
         },
         acceptInsecureCerts: true,
         forceLocal: true,
