@@ -11,3 +11,10 @@ coverage
 /allure-report
 /allure-results
 .env
+
+# Browserstack files
+local.log
+logs/
+browserstack.err
+log/usage.log
+log/usage-debug.log
