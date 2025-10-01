@@ -25,6 +25,7 @@ describe('Register unicorn breeder form - e2e', () => {
   it('should enter name', async () => {
     await expect(browser).toHaveTitle(`What's your name? - e2e form - GOV.UK`)
     await nameEntryPage.enterName.setValue('John Doe')
+    await expect(nameEntryPage.saveAndExit).toBeDisplayed()
     await nameEntryPage.submitButton.click()
 
     await expect(browser).toHaveTitle(

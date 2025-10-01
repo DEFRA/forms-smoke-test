@@ -13,6 +13,10 @@ class NamePage extends Page {
   get submitButton() {
     return $('aria/Continue')
   }
+
+  get saveAndExit() {
+    return $('aria/Save and exit')
+  }
 }
 
 export default new NamePage()
