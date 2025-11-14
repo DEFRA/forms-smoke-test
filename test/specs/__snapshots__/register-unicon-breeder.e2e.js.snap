@@ -1,0 +1,65 @@
+// Snapshot v1
+
+exports[`Register unicorn breeder form - e2e > should check summary page and submit form 1`] = `
+"<dl class="govuk-summary-list">
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">Unicorn insurance policy start date</dt>
+    <dd class="govuk-summary-list__value app-prose-scope">1 February 2024</dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link govuk-link--no-visited-state" href="/preview/draft/e2e-form/when-does-your-unicorn-insurance-policy-start?returnUrl=%2Fpreview%2Fdraft%2Fe2e-form%2Fsummary">Change
+        <span class="govuk-visually-hidden">Unicorn insurance policy start date</span>
+      </a>
+    </dd>
+  </div>
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">Documents</dt>
+    <dd class="govuk-summary-list__value app-prose-scope">Uploaded 1 file</dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link govuk-link--no-visited-state" href="/preview/draft/e2e-form/upload-your-insurance-certificate?returnUrl=%2Fpreview%2Fdraft%2Fe2e-form%2Fsummary">Change
+        <span class="govuk-visually-hidden">Documents</span>
+      </a>
+    </dd>
+  </div>
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">Number of unicorns</dt>
+    <dd class="govuk-summary-list__value app-prose-scope">1 to 5</dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link govuk-link--no-visited-state" href="/preview/draft/e2e-form/how-many-unicorns-do-you-expect-to-breed-each-year?returnUrl=%2Fpreview%2Fdraft%2Fe2e-form%2Fsummary">Change
+        <span class="govuk-visually-hidden">Number of unicorns</span>
+      </a>
+    </dd>
+  </div>
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">Type of unicorn</dt>
+    <dd class="govuk-summary-list__value app-prose-scope">
+      <ul>
+        <li>Flying</li>
+        <li>Aquatic</li>
+      </ul>
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link govuk-link--no-visited-state" href="/preview/draft/e2e-form/what-type-of-unicorns-will-you-breed?returnUrl=%2Fpreview%2Fdraft%2Fe2e-form%2Fsummary">Change
+        <span class="govuk-visually-hidden">Type of unicorn</span>
+      </a>
+    </dd>
+  </div>
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">Where you keep the unicorn</dt>
+    <dd class="govuk-summary-list__value app-prose-scope">unicorns are kept in the garden</dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link govuk-link--no-visited-state" href="/preview/draft/e2e-form/where-will-you-keep-the-unicorns?returnUrl=%2Fpreview%2Fdraft%2Fe2e-form%2Fsummary">Change
+        <span class="govuk-visually-hidden">Where you keep the unicorn</span>
+      </a>
+    </dd>
+  </div>
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">Number of staff</dt>
+    <dd class="govuk-summary-list__value app-prose-scope">5</dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link govuk-link--no-visited-state" href="/preview/draft/e2e-form/how-many-members-of-staff-will-look-after-the-unicorns?returnUrl=%2Fpreview%2Fdraft%2Fe2e-form%2Fsummary">Change
+        <span class="govuk-visually-hidden">Number of staff</span>
+      </a>
+    </dd>
+  </div>
+</dl>"
+`;

@@ -13,6 +13,8 @@ permissions:
 env:
   AWS_REGION: eu-west-2
   AWS_ACCOUNT_ID: '094954420758'
+  BROWSERSTACK_USER: ${{ secrets.BROWSERSTACK_USER }}
+  BROWSERSTACK_KEY: ${{ secrets.BROWSERSTACK_KEY }}
 
 jobs:
   build:
@@ -27,3 +29,7 @@ jobs:
         uses: DEFRA/cdp-build-action/build-test@main
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run the tests
+        run: |
+          npm run test:browserstack

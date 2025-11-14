@@ -246,13 +246,14 @@ export const config = {
   // ) {},
   /**
    * Function to be executed after a test (in Mocha/Jasmine only)
-   * @param {object}  test             test object
-   * @param {object}  context          scope object the test was executed with
-   * @param {Error}   result.error     error object in case the test fails, otherwise `undefined`
-   * @param {*}       result.result    return object of test function
-   * @param {number}  result.duration  duration of test
+   * @param {object} test             test object
+   * @param {object} context          scope object the test was executed with
+   * @param {object} result           object containing test results
+   * @param {Error}  result.error     error object in case the test fails, otherwise `undefined`
+   * @param {*}     result.result    return object of test function
+   * @param {number} result.duration  duration of test
    * @param {boolean} result.passed    true if test has passed, otherwise false
-   * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
+   * @param {object} result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
    */
   afterTest: async function (
     test,
@@ -262,8 +263,9 @@ export const config = {
     await browser.takeScreenshot()
 
     if (error) {
-      browser.executeScript(
-        'browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "At least 1 assertion failed"}}'
+      await browser.executeScript(
+        'browserstack_executor: {"action": "setSessionStatus", "arguments": {"status":"failed","reason": "At least 1 assertion failed"}}',
+        []
       )
     }
   },
@@ -302,7 +304,7 @@ export const config = {
    * @param {object} exitCode 0 - success, 1 - fail
    * @param {object} config wdio configuration object
    * @param {Array.<Object>} capabilities list of capabilities details
-   * @param {<Object>} results object containing test results
+   * @param {Object} results object containing test results
    */
   onComplete: function (exitCode, config, capabilities, results) {}
   /**
