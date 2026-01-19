@@ -17,21 +17,19 @@ import path from 'path'
 
 const __dirname = path.resolve()
 
-describe('Register unicorn breeder e2e form - v2 - GOV.UK', () => {
+describe('Register unicorn breeder form - e2e', () => {
   before(async () => {
-    await nameEntryPage.openV2()
+    await nameEntryPage.open()
   })
 
   it('should enter name', async () => {
-    await expect(browser).toHaveTitle(
-      `What's your name? - e2e form - v2 - GOV.UK`
-    )
+    await expect(browser).toHaveTitle(`What's your name? - e2e form - GOV.UK`)
     await nameEntryPage.enterName.setValue('John Doe')
     await expect(nameEntryPage.saveAndExit).toBeDisplayed()
     await nameEntryPage.submitButton.click()
 
     await expect(browser).toHaveTitle(
-      `What's your email address? - e2e form - v2 - GOV.UK`
+      `What's your email address? - e2e form - GOV.UK`
     )
   })
 
@@ -39,7 +37,7 @@ describe('Register unicorn breeder e2e form - v2 - GOV.UK', () => {
     await emailPage.enterEmail.setValue('john.doe@example.co.uk')
     await emailPage.submitButton.click()
     await expect(browser).toHaveTitle(
-      `What's your phone number? - e2e form - v2 - GOV.UK`
+      `What's your phone number? - e2e form - GOV.UK`
     )
   })
 
@@ -48,7 +46,7 @@ describe('Register unicorn breeder e2e form - v2 - GOV.UK', () => {
     await phoneNumberPage.submitButton.click()
 
     await expect(browser).toHaveTitle(
-      `What's your address? - e2e form - v2 - GOV.UK`
+      `What's your address? - e2e form - GOV.UK`
     )
   })
 
@@ -61,7 +59,7 @@ describe('Register unicorn breeder e2e form - v2 - GOV.UK', () => {
     await addressPage.submitButton.click()
 
     await expect(browser).toHaveTitle(
-      'Do you want your unicorn breeder certificate sent to this address? - e2e form - v2 - GOV.UK'
+      'Do you want your unicorn breeder certificate sent to this address? - e2e form - GOV.UK'
     )
   })
 
@@ -70,7 +68,7 @@ describe('Register unicorn breeder e2e form - v2 - GOV.UK', () => {
     await certificateAddressPage.submitButton.click()
 
     await expect(browser).toHaveTitle(
-      'When does your unicorn insurance policy start? - e2e form - v2 - GOV.UK'
+      'When does your unicorn insurance policy start? - e2e form - GOV.UK'
     )
   })
 
@@ -84,7 +82,7 @@ describe('Register unicorn breeder e2e form - v2 - GOV.UK', () => {
     await policyStartDatePage.submitButton.click()
 
     await expect(browser).toHaveTitle(
-      'Upload your insurance certificate - e2e form - v2 - GOV.UK'
+      'Upload your insurance certificate - e2e form - GOV.UK'
     )
   })
 
@@ -109,7 +107,7 @@ describe('Register unicorn breeder e2e form - v2 - GOV.UK', () => {
     await uploadFilePage.submitButton.click()
 
     await expect(browser).toHaveTitle(
-      `How many unicorns do you expect to breed each year? - e2e form - v2 - GOV.UK`
+      `How many unicorns do you expect to breed each year? - e2e form - GOV.UK`
     )
   })
 
@@ -118,7 +116,7 @@ describe('Register unicorn breeder e2e form - v2 - GOV.UK', () => {
     await selectNoOfUnicornsPage.submitButton.click()
 
     await expect(browser).toHaveTitle(
-      'What type of unicorns will you breed? - e2e form - v2 - GOV.UK'
+      'What type of unicorns will you breed? - e2e form - GOV.UK'
     )
   })
 
@@ -128,7 +126,7 @@ describe('Register unicorn breeder e2e form - v2 - GOV.UK', () => {
     await selectTypeOfUnicornsPage.submitButton.click()
 
     await expect(browser).toHaveTitle(
-      'Where will you keep the unicorns? - e2e form - v2 - GOV.UK'
+      'Where will you keep the unicorns? - e2e form - GOV.UK'
     )
   })
 
@@ -139,7 +137,7 @@ describe('Register unicorn breeder e2e form - v2 - GOV.UK', () => {
     await unicornsTextPage.submitButton.click()
 
     await expect(browser).toHaveTitle(
-      'How many members of staff will look after the unicorns? - e2e form - v2 - GOV.UK'
+      'How many members of staff will look after the unicorns? - e2e form - GOV.UK'
     )
   })
 
@@ -147,9 +145,7 @@ describe('Register unicorn breeder e2e form - v2 - GOV.UK', () => {
     await noOfUnicornsStaffPage.enterNoOfUnicornStaff.setValue('5')
     await noOfUnicornsStaffPage.submitButton.click()
 
-    await expect(browser).toHaveTitle(
-      'Check your answers before sending your form - e2e form - v2 - GOV.UK'
-    )
+    await expect(browser).toHaveTitle('Summary - e2e form - GOV.UK')
   })
 
   it('should check summary page and submit form', async () => {
@@ -160,6 +156,6 @@ describe('Register unicorn breeder e2e form - v2 - GOV.UK', () => {
 
     await summaryPage.submitButton.click()
 
-    await expect(browser).toHaveTitle('Form submitted - e2e form - v2 - GOV.UK')
+    await expect(browser).toHaveTitle('Form submitted - e2e form - GOV.UK')
   })
 })

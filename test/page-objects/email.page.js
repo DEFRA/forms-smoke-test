@@ -9,6 +9,10 @@ class EmailPage extends Page {
   get submitButton() {
     return $('aria/Continue')
   }
+
+  get saveAndExit() {
+    return $('button=Save and exit')
+  }
 }
 
 export default new EmailPage()

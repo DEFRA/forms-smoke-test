@@ -1,0 +1,5 @@
+// Snapshot v1
+
+exports[`Save and exit form - e2e > saves and exits 1`] = `"<input class="govuk-input" id="email" name="email" type="text" aria-describedby="email-hint">"`;
+
+exports[`Save and exit form - e2e > saves and exits 2`] = `"<input class="govuk-input" id="emailConfirmation" name="emailConfirmation" type="text">"`;
