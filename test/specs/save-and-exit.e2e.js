@@ -39,6 +39,8 @@ describe('Save and exit form - e2e', () => {
     await saveYourProgressPage.saveProgress.click()
 
     // Assert that the save was successful and the confirmation page is displayed
-    await expect(browser).toHaveTitle('Your progress has been saved - e2e form - GOV.UK')
+    await expect(browser).toHaveTitle(
+      'Your progress has been saved - e2e form - GOV.UK'
+    )
   })
 })
