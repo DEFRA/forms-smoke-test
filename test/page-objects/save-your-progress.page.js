@@ -19,17 +19,17 @@ class SaveYourProgressPage extends Page {
   }
 
   get securityQuestionMemorablePlace() {
-    return $(`aria/What is a memorable place you have visited ? `)
+    return $(`aria/What is a memorable place you have visited?`)
   }
 
   get securityQuestionCharacterName() {
     return $(
-      `aria/What is the name of your favourite character from a story or TV show ? `
+      `aria/What is the name of your favourite character from a story or TV show?`
     )
   }
 
   get securityQuestionAudioRecommendation() {
-    return $(`aria/What album or song do you always recommend to others ? `)
+    return $(`aria/What album or song do you always recommend to others?`)
   }
 
   get securityAnswerField() {

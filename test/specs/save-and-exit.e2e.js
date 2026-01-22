@@ -26,16 +26,7 @@ describe('Save and exit form - e2e', () => {
     await expect(browser).toHaveTitle(
       `Save your progress for later - e2e form - GOV.UK`
     )
-
-    // await expect(saveYourProgressPage.emailAddressField).toMatchSnapshot()
-    // await expect(browser).toMatchFullPageSnapshot('fullPage')
-
     await expect(saveYourProgressPage.saveProgress).toBeDisplayed()
-
-    // await expect(saveYourProgressPage.emailAddressField).toMatchSnapshot()
-    // await expect(saveYourProgressPage.securityQuestionMemorablePlace).toMatchSnapshot()
-    // await expect(saveYourProgressPage.securityAnswerField).toMatchSnapshot()
-    // await expect(saveYourProgressPage.saveProgress).toMatchSnapshot()
 
     await saveYourProgressPage.emailAddressField.setValue(
       'jignesh.nayi@defra.gov.uk'
@@ -43,7 +34,11 @@ describe('Save and exit form - e2e', () => {
     await saveYourProgressPage.confirmEmailAddressField.setValue(
       'jignesh.nayi@defra.gov.uk'
     )
+    await saveYourProgressPage.securityQuestionMemorablePlace.click()
     await saveYourProgressPage.securityAnswerField.setValue('London')
     await saveYourProgressPage.saveProgress.click()
+
+    // Assert that the save was successful and the confirmation page is displayed
+    await expect(browser).toHaveTitle('Your progress has been saved - e2e form - GOV.UK')
   })
 })
