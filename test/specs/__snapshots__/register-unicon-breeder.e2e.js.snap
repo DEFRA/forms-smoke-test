@@ -1,0 +1,55 @@
+// Snapshot v1
+
+exports[`Register unicorn breeder form - e2e > should check summary page and submit form 1`] = `
+"<dl class="govuk-summary-list">
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">Name</dt>
+    <dd class="govuk-summary-list__value app-prose-scope">John Doe</dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link govuk-link--no-visited-state" href="/form/preview/draft/e2e-form/whats-your-name?returnUrl=%2Fform%2Fpreview%2Fdraft%2Fe2e-form%2Fsummary">Change
+        <span class="govuk-visually-hidden">Name</span>
+      </a>
+    </dd>
+  </div>
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">Email adress</dt>
+    <dd class="govuk-summary-list__value app-prose-scope">john.doe@example.co.uk</dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link govuk-link--no-visited-state" href="/form/preview/draft/e2e-form/whats-your-email-address?returnUrl=%2Fform%2Fpreview%2Fdraft%2Fe2e-form%2Fsummary">Change
+        <span class="govuk-visually-hidden">Email adress</span>
+      </a>
+    </dd>
+  </div>
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">Phone number</dt>
+    <dd class="govuk-summary-list__value app-prose-scope">07779875</dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link govuk-link--no-visited-state" href="/form/preview/draft/e2e-form/whats-your-phone-number?returnUrl=%2Fform%2Fpreview%2Fdraft%2Fe2e-form%2Fsummary">Change
+        <span class="govuk-visually-hidden">Phone number</span>
+      </a>
+    </dd>
+  </div>
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">Address</dt>
+    <dd class="govuk-summary-list__value app-prose-scope">1 High Street
+      <br />Townsville
+      <br />TS1 1ST
+      <br />
+    </dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link govuk-link--no-visited-state" href="/form/preview/draft/e2e-form/whats-your-address?returnUrl=%2Fform%2Fpreview%2Fdraft%2Fe2e-form%2Fsummary">Change
+        <span class="govuk-visually-hidden">Address</span>
+      </a>
+    </dd>
+  </div>
+  <div class="govuk-summary-list__row">
+    <dt class="govuk-summary-list__key">Send certificate to same address</dt>
+    <dd class="govuk-summary-list__value app-prose-scope">Yes</dd>
+    <dd class="govuk-summary-list__actions">
+      <a class="govuk-link govuk-link--no-visited-state" href="/form/preview/draft/e2e-form/do-you-want-your-unicorn-breeder-certificate-sent-to-this-address?returnUrl=%2Fform%2Fpreview%2Fdraft%2Fe2e-form%2Fsummary">Change
+        <span class="govuk-visually-hidden">Send certificate to same address</span>
+      </a>
+    </dd>
+  </div>
+</dl>"
+`;

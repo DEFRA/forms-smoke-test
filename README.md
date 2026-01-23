@@ -29,6 +29,8 @@ Create a form (if it doesn't exist)- Name should be `e2e form`
 
 And upload form json from - [test/file/register-as-a-unicorn-breeder.json](register-as-a-unicorn-breeder.json)
 
+Do the same V2 (migrated to new editor) version of this form using [test/file/register-as-a-unicorn-breeder-v2.json](register-as-a-unicorn-breeder-v2.json)
+
 ### Running local tests
 
 Start application you are testing on the url specified in `baseUrl` [wdio.local.conf.js](wdio.local.conf.js)

@@ -6,6 +6,10 @@ class NamePage extends Page {
     return browser.url('/form/preview/draft/e2e-form/whats-your-name')
   }
 
+  openV2() {
+    return browser.url('/form/preview/draft/e2e-form-v2/whats-your-name')
+  }
+
   get enterName() {
     return $(`aria/What's your name?`)
   }

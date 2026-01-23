@@ -1,0 +1,403 @@
+{
+  "name": "e2e form - v2",
+  "pages": [
+    {
+      "path": "/whats-your-name",
+      "title": "What's your name?",
+      "components": [
+        {
+          "type": "TextField",
+          "name": "textField",
+          "title": "Name",
+          "hint": "This is a single line text box. We use it to ask for information that's likely to be 1 sentence",
+          "options": {
+            "required": true
+          },
+          "schema": {},
+          "shortDescription": "Name",
+          "id": "1cdaecfe-0b90-4704-afb5-046da3832467"
+        }
+      ],
+      "next": [
+        {
+          "path": "/whats-your-email-address"
+        }
+      ],
+      "section": "section",
+      "id": "198c7f2b-dd21-4662-811d-f617e3e49b09"
+    },
+    {
+      "path": "/whats-your-email-address",
+      "title": "What's your email address?",
+      "components": [
+        {
+          "type": "EmailAddressField",
+          "title": "Email adress",
+          "name": "MaTzaT",
+          "shortDescription": "Email adress",
+          "hint": "This is an email address. An email address must contain an at sign @",
+          "options": {
+            "required": true,
+            "classes": ""
+          },
+          "schema": {},
+          "id": "2c9c6941-a277-454c-9f57-c0345635eb5b"
+        }
+      ],
+      "next": [
+        {
+          "path": "/whats-your-phone-number"
+        }
+      ],
+      "section": "section",
+      "id": "270bbfc4-5a7d-45bb-bac6-100fb56180e9"
+    },
+    {
+      "path": "/whats-your-phone-number",
+      "title": "What's your phone number?",
+      "components": [
+        {
+          "name": "BdKgCe",
+          "options": {
+            "required": true
+          },
+          "type": "TelephoneNumberField",
+          "title": "Phone number",
+          "schema": {},
+          "hint": "This is a telephone number. This field can only contain numbers and the + symbol",
+          "shortDescription": "Phone number",
+          "id": "fe79f817-284d-4f3f-a9b4-c2609926993c"
+        }
+      ],
+      "next": [
+        {
+          "path": "/whats-your-address"
+        }
+      ],
+      "section": "section",
+      "id": "e81180ec-21f5-4c2a-99db-4de05473d65d"
+    },
+    {
+      "path": "/whats-your-address",
+      "title": "",
+      "components": [
+        {
+          "type": "UkAddressField",
+          "title": "What's  your address?",
+          "name": "wZLWPy",
+          "shortDescription": "Addresses",
+          "hint": "This is a UK address. Users must enter address line 1, town and a postcode",
+          "options": {
+            "required": true
+          },
+          "schema": {},
+          "id": "5925bb03-8c19-4739-a6a2-b68600eff17c"
+        }
+      ],
+      "next": [
+        {
+          "path": "/do-you-want-your-unicorn-breeder-certificate-sent-to-this-address"
+        }
+      ],
+      "section": "section",
+      "id": "861bb87c-f900-425b-9cda-27b2cfc86206"
+    },
+    {
+      "path": "/do-you-want-your-unicorn-breeder-certificate-sent-to-this-address",
+      "title": "Do you want your unicorn breeder certificate sent to this address?",
+      "components": [
+        {
+          "name": "dBfuID",
+          "options": {},
+          "type": "YesNoField",
+          "title": "Send certificate to same address",
+          "schema": {},
+          "hint": "This is a yes or no question. We can branch to different questions based on the answer",
+          "values": {
+            "type": "listRef"
+          },
+          "shortDescription": "Send certificate to same address",
+          "id": "75710a66-6688-4cad-9d7e-509b06c5895d"
+        }
+      ],
+      "next": [
+        {
+          "path": "/what-address-do-you-want-the-certificate-sent-to",
+          "condition": "oyGPwP"
+        },
+        {
+          "path": "/when-does-your-unicorn-insurance-policy-start",
+          "condition": ""
+        }
+      ],
+      "section": "section",
+      "id": "2272790e-b3ea-4982-aaed-8e95c3bb49f0"
+    },
+    {
+      "path": "/what-address-do-you-want-the-certificate-sent-to",
+      "title": "What address do you want the certificate sent to?",
+      "components": [
+        {
+          "name": "AegFro",
+          "options": {},
+          "type": "UkAddressField",
+          "title": "Address to send certificate",
+          "schema": {},
+          "hint": "This is a simple branch to an extra question. This address question is shown to users who select 'no' when asked if this is the address where the certificate should be sent",
+          "shortDescription": "Address to send certificate",
+          "id": "9599f361-5b97-49bc-9830-d3258b26dbdc"
+        }
+      ],
+      "next": [
+        {
+          "path": "/when-does-your-unicorn-insurance-policy-start"
+        }
+      ],
+      "section": "section",
+      "id": "dde56f61-714c-4786-b34d-f9cfc815bae7",
+      "condition": "167cd7b9-a77f-4900-9648-ad55b8fe7cbc"
+    },
+    {
+      "path": "/when-does-your-unicorn-insurance-policy-start",
+      "title": "When does your unicorn insurance policy start?",
+      "components": [
+        {
+          "name": "mjAccr",
+          "options": {},
+          "type": "DatePartsField",
+          "title": "Unicorn insurance policy start date",
+          "schema": {},
+          "hint": "This is a date. We can add custom validation to the field based on your requirements. For example, the date entered must be before or after a certain date.",
+          "shortDescription": "Unicorn insurance policy start date",
+          "id": "b4ea1ec9-d8f6-4a59-9d08-f09145ee1851"
+        }
+      ],
+      "next": [
+        {
+          "path": "/upload-your-insurance-certificate"
+        }
+      ],
+      "id": "d08d4572-adaa-4166-bfc1-fe7846b451af"
+    },
+    {
+      "title": "Upload your insurance certificate",
+      "path": "/upload-your-insurance-certificate",
+      "controller": "FileUploadPageController",
+      "next": [
+        {
+          "path": "/how-many-unicorns-do-you-expect-to-breed-each-year"
+        }
+      ],
+      "components": [
+        {
+          "name": "dLzALM",
+          "title": "Documents",
+          "type": "FileUploadField",
+          "hint": "We can specify the format and number of uploaded files.",
+          "options": {
+            "required": false
+          },
+          "schema": {
+            "min": 1,
+            "max": 3
+          },
+          "shortDescription": "Documents",
+          "id": "9dc19b9c-289f-4e3a-8ceb-15e814e2a0c5"
+        }
+      ],
+      "id": "091f9b19-ffda-470f-98ef-33355d42d91a"
+    },
+    {
+      "path": "/how-many-unicorns-do-you-expect-to-breed-each-year",
+      "title": "How many unicorns do you expect to breed each year?",
+      "components": [
+        {
+          "name": "aitzzV",
+          "options": {},
+          "type": "RadiosField",
+          "list": "5d141aa0-fa6a-41bd-9cd1-e9c6d1e22c13",
+          "title": "Number of unicorns",
+          "schema": {},
+          "hint": "This is a radio button. Users can only select one option from the list",
+          "values": {
+            "type": "listRef"
+          },
+          "shortDescription": "Number of unicorns",
+          "id": "63f8233e-011d-4384-bd30-d48177e9455c"
+        }
+      ],
+      "next": [
+        {
+          "path": "/what-type-of-unicorns-will-you-breed"
+        }
+      ],
+      "id": "b9659042-9916-42ca-95db-cd5a51198cde"
+    },
+    {
+      "path": "/what-type-of-unicorns-will-you-breed",
+      "title": "What type of unicorns will you breed?",
+      "components": [
+        {
+          "name": "DyfjJC",
+          "options": {},
+          "type": "CheckboxesField",
+          "list": "827bf7db-4151-404a-a8d7-e4a20535a9e8",
+          "title": "Type of unicorn",
+          "schema": {},
+          "hint": "This is a check box. Users can select more than one option",
+          "values": {
+            "type": "listRef"
+          },
+          "shortDescription": "Type of unicorn",
+          "id": "1ff7b394-9dad-4b08-85f8-0a3cd9356786"
+        }
+      ],
+      "next": [
+        {
+          "path": "/where-will-you-keep-the-unicorns"
+        }
+      ],
+      "id": "fe2b6e60-d4dd-492a-9e49-319b199bbc15"
+    },
+    {
+      "path": "/where-will-you-keep-the-unicorns",
+      "title": "Where will you keep the unicorns?",
+      "components": [
+        {
+          "name": "bClCvo",
+          "options": {},
+          "schema": {},
+          "type": "MultilineTextField",
+          "title": "Where you keep the unicorn",
+          "hint": "This is a multi-line text box. We use it when you expect the response to be more than 1 sentence long.",
+          "shortDescription": "Where you keep the unicorn",
+          "id": "36c5bf5b-2d3a-45dc-95d3-e3700dbf9405"
+        }
+      ],
+      "next": [
+        {
+          "path": "/how-many-members-of-staff-will-look-after-the-unicorns"
+        }
+      ],
+      "id": "d9955573-0fb4-4f4e-bee5-de7a74e59e69"
+    },
+    {
+      "path": "/how-many-members-of-staff-will-look-after-the-unicorns",
+      "title": "How many members of staff will look after the unicorns?",
+      "components": [
+        {
+          "name": "zhJMaM",
+          "options": {
+            "classes": "govuk-!-width-one-quarter"
+          },
+          "type": "NumberField",
+          "title": "Number of staff",
+          "schema": {},
+          "hint": "This is a number field. The answer must be a number. We can use custom validation to set decimal places, minimum and maximum values",
+          "shortDescription": "Number of staff",
+          "id": "55da2318-fcb8-41e9-b342-fa1cb56a9dd2"
+        }
+      ],
+      "next": [
+        {
+          "path": "/summary"
+        }
+      ],
+      "id": "0afbc6a4-5742-48a0-9072-6c79760b8569"
+    },
+    {
+      "title": "",
+      "path": "/summary",
+      "controller": "SummaryPageWithConfirmationEmailController",
+      "components": [],
+      "next": [],
+      "id": "2e4149c3-7945-48ee-ae20-acb409361c0e"
+    }
+  ],
+  "conditions": [
+    {
+      "id": "167cd7b9-a77f-4900-9648-ad55b8fe7cbc",
+      "displayName": "Address is different",
+      "items": [
+        {
+          "id": "f9d7b642-ee74-42d4-b87a-1fafb7158e7b",
+          "componentId": "75710a66-6688-4cad-9d7e-509b06c5895d",
+          "operator": "is",
+          "type": "BooleanValue",
+          "value": false
+        }
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "name": "section",
+      "title": "Contact details",
+      "hideTitle": false,
+      "id": "46ecffb6-07ba-49c0-8af5-9d7895c6ddb4"
+    },
+    {
+      "name": "personal-details",
+      "title": "Personal Details",
+      "hideTitle": false,
+      "id": "0da34979-af53-4b0d-ba46-fe9b27799ef4"
+    }
+  ],
+  "lists": [
+    {
+      "title": "number of unicorns",
+      "name": "IeFOkf",
+      "type": "string",
+      "items": [
+        {
+          "text": "1 to 5",
+          "value": "1 to 5",
+          "id": "a832e9bb-dac8-4c16-90c7-e8938ad3c10c"
+        },
+        {
+          "text": "6 to 10",
+          "value": "6 to 10",
+          "id": "01f97dd9-5ff2-4993-944b-cc1eb73998fd"
+        },
+        {
+          "text": "11 or more",
+          "value": "11 or more",
+          "id": "f0a2454c-1e66-427e-aeee-0c3966193020"
+        }
+      ],
+      "id": "5d141aa0-fa6a-41bd-9cd1-e9c6d1e22c13"
+    },
+    {
+      "title": "Type of unicorn",
+      "name": "fXiZrL",
+      "type": "string",
+      "items": [
+        {
+          "text": "Flying",
+          "value": "Flying",
+          "id": "7fcb3f19-34e6-4742-91a3-14f0ddfc8f3d"
+        },
+        {
+          "text": "Fire breathing",
+          "value": "Fire breathing",
+          "id": "6a8750ec-5aed-4fbb-b39a-a739deda1d26"
+        },
+        {
+          "text": "Aquatic",
+          "value": "Aquatic",
+          "id": "f9cceef5-1417-40a7-b5d5-a8e12a04019f"
+        },
+        {
+          "text": "Rainbow",
+          "value": "Rainbow",
+          "id": "80c5e048-c3df-4615-8156-d570713b0e20"
+        }
+      ],
+      "id": "827bf7db-4151-404a-a8d7-e4a20535a9e8"
+    }
+  ],
+  "outputEmail": "defraforms@defra.gov.uk",
+  "startPage": "/whats-your-name",
+  "engine": "V2",
+  "schema": 2
+}
