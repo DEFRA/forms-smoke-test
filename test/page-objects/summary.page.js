@@ -15,7 +15,7 @@ class SummaryPage extends Page {
   }
 
   get submitButton() {
-    return $('aria/Send')
+    return $('aria/Submit')
   }
 }
 
