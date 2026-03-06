@@ -13,7 +13,7 @@ import selectTypeOfUnicornsPage from '~/test/page-objects/select-type-of-unicorn
 import unicornsTextPage from '~/test/page-objects/unicorns-text.page.js'
 import noOfUnicornsStaffPage from '~/test/page-objects/no-of-unicorns-staff.page.js'
 import summaryPage from '~/test/page-objects/summary.page.js'
-import path from 'path'
+import path from 'node:path'
 
 const __dirname = path.resolve()
 
