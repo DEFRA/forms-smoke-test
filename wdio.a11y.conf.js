@@ -8,6 +8,14 @@ const oneHour = 60 * 60 * 1000
 export const config = {
   runner: 'local',
 
+  baseUrl: process.env.ENVIRONMENT
+    ? `https://forms-runner.${process.env.ENVIRONMENT}.cdp-int.defra.cloud`
+    : 'http://localhost:3009',
+
+  // Connection to remote chromedriver
+  hostname: process.env.CHROMEDRIVER_URL || '127.0.0.1',
+  port: process.env.CHROMEDRIVER_PORT || 4444,
+
   specs: ['./test/specs/**/*.a11y.js'],
   exclude: [],
 
@@ -22,6 +30,7 @@ export const config = {
           'wdio:enforceWebDriverClassic': true,
           'goog:chromeOptions': {
             args: [
+              '--headless',
               '--no-sandbox',
               '--disable-infobars',
               '--disable-gpu',
@@ -37,8 +46,6 @@ export const config = {
 
   // run all a11y specs even if some fail
   bail: 0,
-
-  baseUrl: 'http://localhost:3009',
 
   waitforTimeout: 10000,
   waitforInterval: 200,
@@ -110,7 +117,9 @@ export const config = {
             return reject(reportError)
           }
 
-          allure(['open'])
+          if (!process.env.CI) {
+            allure(['open'])
+          }
           resolve()
         }
       )
