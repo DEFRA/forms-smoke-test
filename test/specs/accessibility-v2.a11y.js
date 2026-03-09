@@ -72,16 +72,7 @@ describe('Accessibility - Register unicorn breeder form v2', () => {
     ])
     await policyStartDatePage.submitButton.click()
   })
-  // it('certificate delivery address page should have no WCAG 2.2 AA violations', async () => {
-  //   await checkAccessibility(browser, 'v2-certificate-delivery-address-page')
 
-  //   await Promise.all([
-  //     addressPage.enterAddressLine1.setValue('2 Low Street'),
-  //     addressPage.enterTown.setValue('Cityville'),
-  //     addressPage.enterPostcode.setValue('TS2 2ND')
-  //   ])
-  //   await addressPage.submitButton.click()
-  // })
   it('upload file page should have no WCAG 2.2 AA violations', async () => {
     await checkAccessibility(browser, 'v2-upload-file-page')
 

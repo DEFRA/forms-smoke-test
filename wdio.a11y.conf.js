@@ -79,7 +79,7 @@ export const config = {
    * @param {object} context - The Mocha test context
    * @param {object} result - The test result details
    * @param {Error|undefined} result.error - The error if the test failed
-   * @param {*} result.result - The test result value
+   * @param {object} result.result - The test result value
    * @param {number} result.duration - The test duration in ms
    * @param {boolean} result.passed - Whether the test passed
    * @param {object} result.retries - Retry information
@@ -96,9 +96,9 @@ export const config = {
    * Generates and opens the Allure report after all tests complete.
    *
    * @param {number} exitCode - 0 for success, 1 for failure
-   * @param {import('@wdio/types').Options.Testrunner} config - The resolved WDIO config
-   * @param {import('@wdio/types').Capabilities[]} capabilities - The list of capabilities
-   * @param {import('@wdio/types').Frameworks.TestResult[]} results - The test results
+   * @param {Options.Testrunner} config - The resolved WDIO config
+   * @param {Capabilities[]} capabilities - The list of capabilities
+   * @param {Frameworks.TestResult[]} results - The test results
    * @returns {Promise<void>} Resolves when the report is generated and opened
    */
   onComplete: function (exitCode, config, capabilities, results) {
@@ -126,3 +126,7 @@ export const config = {
     })
   }
 }
+
+/***
+ * @import {Options, Capabilities, Frameworks} from '@wdio/types'
+ */
