@@ -9,10 +9,12 @@
   "license": "OGL-UK-3.0",
   "type": "module",
   "scripts": {
-    "clean": "rm -rf allure-results && rm -rf allure-report",
-    "test": "npm run clean && wdio run wdio.conf.js",
-    "test:local": "npm run clean && wdio run wdio.local.conf.js",
+    "clean": "rm -rf allure-results && rm -rf allure-report && rm -rf accessibility-reports",
+    "test": "npm run clean && wdio run wdio.conf.js && wdio run wdio.a11y.conf.js",
+    "test:local": "npm run clean && wdio run wdio.local.conf.js && wdio run wdio.a11y.conf.js",
     "test:local:debug": "DEBUG=true npm run test:local",
+    "test:a11y": "npm run clean && wdio run wdio.a11y.conf.js",
+    "test:a11y:debug": "DEBUG=true npm run test:a11y",
     "format": "prettier --write 'test/**/*.js' '**/*.{js,md,json,config.js}'",
     "format:check": "prettier --check 'test/**/*.js' '**/*.{js,md,json,config.js}'",
     "lint": "eslint .",
@@ -23,6 +25,7 @@
     "report:publish": "npm run report; ./bin/publish-tests.sh"
   },
   "dependencies": {
+    "@axe-core/webdriverio": "4.11.1",
     "@babel/cli": "7.24.1",
     "@babel/core": "7.24.4",
     "@babel/preset-env": "7.24.4",
@@ -34,6 +37,7 @@
     "@wdio/mocha-framework": "9.0.8",
     "@wdio/spec-reporter": "9.0.8",
     "allure-commandline": "2.27.0",
+    "axe-html-reporter": "2.2.11",
     "babel-plugin-module-resolver": "5.0.0"
   },
   "devDependencies": {

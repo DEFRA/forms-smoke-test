@@ -15,6 +15,7 @@
   },
   "exclude": [".cache", ".public", ".server", "node_modules"],
   "include": [
+    "typings/**/*.d.ts",
     "**/*.cjs",
     "**/*.js",
     ".eslintrc.*",

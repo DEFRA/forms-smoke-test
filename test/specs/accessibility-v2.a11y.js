@@ -1,6 +1,7 @@
-import { browser, expect } from '@wdio/globals'
+import { browser } from '@wdio/globals'
 import { before } from 'mocha'
 
+import { checkAccessibility } from '~/test/helpers/accessibility.js'
 import nameEntryPage from '~/test/page-objects/name.page.js'
 import emailPage from '~/test/page-objects/email.page.js'
 import phoneNumberPage from '~/test/page-objects/phone-number.page.js'
@@ -17,149 +18,118 @@ import path from 'node:path'
 
 const __dirname = path.resolve()
 
-describe('Register unicorn breeder e2e form - v2 - GOV.UK', () => {
+describe('Accessibility - Register unicorn breeder form v2', () => {
   before(async () => {
     await nameEntryPage.openV2()
   })
 
-  it('should enter name', async () => {
-    await expect(browser).toHaveTitle(
-      `What's your name? - e2e form - v2 - GOV.UK`
-    )
-    await nameEntryPage.enterName.setValue('John Doe')
-    await expect(nameEntryPage.saveAndExit).toBeDisplayed()
-    await nameEntryPage.submitButton.click()
+  it('name page should have no WCAG 2.2 AA violations', async () => {
+    await checkAccessibility(browser, 'v2-name-page')
 
-    await expect(browser).toHaveTitle(
-      `What's your email address? - e2e form - v2 - GOV.UK`
-    )
+    await nameEntryPage.enterName.setValue('John Doe')
+    await nameEntryPage.submitButton.click()
   })
 
-  it('should enter email address', async () => {
+  it('email page should have no WCAG 2.2 AA violations', async () => {
+    await checkAccessibility(browser, 'v2-email-page')
+
     await emailPage.enterEmail.setValue('john.doe@example.co.uk')
     await emailPage.submitButton.click()
-    await expect(browser).toHaveTitle(
-      `What's your phone number? - e2e form - v2 - GOV.UK`
-    )
   })
 
-  it('should enter phone number', async () => {
+  it('phone number page should have no WCAG 2.2 AA violations', async () => {
+    await checkAccessibility(browser, 'v2-phone-number-page')
+
     await phoneNumberPage.enterPhoneNumber.setValue('07779875')
     await phoneNumberPage.submitButton.click()
-
-    await expect(browser).toHaveTitle(
-      `What's your address? - e2e form - v2 - GOV.UK`
-    )
   })
 
-  it('should enter address', async () => {
+  it('address page should have no WCAG 2.2 AA violations', async () => {
+    await checkAccessibility(browser, 'v2-address-page')
+
     await Promise.all([
       addressPage.enterAddressLine1.setValue('1 High Street'),
       addressPage.enterTown.setValue('Townsville'),
       addressPage.enterPostcode.setValue('TS1 1ST')
     ])
     await addressPage.submitButton.click()
-
-    await expect(browser).toHaveTitle(
-      'Do you want your unicorn breeder certificate sent to this address? - e2e form - v2 - GOV.UK'
-    )
   })
 
-  it('should select Yes to use same address for certificate', async () => {
+  it('certificate address page should have no WCAG 2.2 AA violations', async () => {
+    await checkAccessibility(browser, 'v2-certificate-address-page')
+
     await certificateAddressPage.selectYesOrNo.click()
     await certificateAddressPage.submitButton.click()
-
-    await expect(browser).toHaveTitle(
-      'When does your unicorn insurance policy start? - e2e form - v2 - GOV.UK'
-    )
   })
 
-  it('should enter policy start date', async () => {
+  it('policy start date page should have no WCAG 2.2 AA violations', async () => {
+    await checkAccessibility(browser, 'v2-policy-start-date-page')
+
     await Promise.all([
       policyStartDatePage.enterDay.setValue('01'),
       policyStartDatePage.enterMonth.setValue('02'),
       policyStartDatePage.enterYear.setValue('2024')
     ])
-
     await policyStartDatePage.submitButton.click()
-
-    await expect(browser).toHaveTitle(
-      'Upload your insurance certificate - e2e form - v2 - GOV.UK'
-    )
   })
 
-  it('should upload file', async () => {
+  it('upload file page should have no WCAG 2.2 AA violations', async () => {
+    await checkAccessibility(browser, 'v2-upload-file-page')
+
     const filePath = path.join(__dirname, 'test/file/test-file.txt')
     const remoteFilePath = browser.uploadFile(filePath)
     await uploadFilePage.chooseFile.setValue(await remoteFilePath)
     await uploadFilePage.uploadFile.click()
 
     let fileUploaded = true
-
     while (fileUploaded) {
       const uploadedFileElem = uploadFilePage.checkForUploadedFile
-
       if (await uploadedFileElem.isExisting()) {
         fileUploaded = false
       }
     }
 
-    const uploadedElem = uploadFilePage.checkForUploadedFile
-    await expect(uploadedElem).toBeDisplayed()
     await uploadFilePage.submitButton.click()
-
-    await expect(browser).toHaveTitle(
-      `How many unicorns do you expect to breed each year? - e2e form - v2 - GOV.UK`
-    )
   })
 
-  it('should select how many unicorns', async () => {
+  it('select number of unicorns page should have no WCAG 2.2 AA violations', async () => {
+    await checkAccessibility(browser, 'v2-select-no-of-unicorns-page')
+
     await selectNoOfUnicornsPage.select1to5.click()
     await selectNoOfUnicornsPage.submitButton.click()
-
-    await expect(browser).toHaveTitle(
-      'What type of unicorns will you breed? - e2e form - v2 - GOV.UK'
-    )
   })
 
-  it('should select type of unicorns', async () => {
+  it('select type of unicorns page should have no WCAG 2.2 AA violations', async () => {
+    await checkAccessibility(browser, 'v2-select-type-of-unicorns-page')
+
     await selectTypeOfUnicornsPage.selectFlying.click()
     await selectTypeOfUnicornsPage.selectAquatic.click()
     await selectTypeOfUnicornsPage.submitButton.click()
-
-    await expect(browser).toHaveTitle(
-      'Where will you keep the unicorns? - e2e form - v2 - GOV.UK'
-    )
   })
 
-  it('should enter where you will keep unicorns', async () => {
+  it('unicorns text page should have no WCAG 2.2 AA violations', async () => {
+    await checkAccessibility(browser, 'v2-unicorns-text-page')
+
     await unicornsTextPage.enterWhereYouKeepUnicorn.setValue(
       'unicorns are kept in the garden'
     )
     await unicornsTextPage.submitButton.click()
-
-    await expect(browser).toHaveTitle(
-      'How many members of staff will look after the unicorns? - e2e form - v2 - GOV.UK'
-    )
   })
 
-  it('should enter no of unicorns staff', async () => {
+  it('number of staff page should have no WCAG 2.2 AA violations', async () => {
+    await checkAccessibility(browser, 'v2-no-of-unicorns-staff-page')
+
     await noOfUnicornsStaffPage.enterNoOfUnicornStaff.setValue('5')
     await noOfUnicornsStaffPage.submitButton.click()
-
-    await expect(browser).toHaveTitle(
-      'Check your answers before sending your form - e2e form - v2 - GOV.UK'
-    )
   })
 
-  it('should check summary page and submit form', async () => {
-    await summaryPage.summary.isExisting()
-    await summaryPage.contactDetails.isExisting()
-
-    await expect(summaryPage.summaryList).toMatchSnapshot()
+  it('summary page should have no WCAG 2.2 AA violations', async () => {
+    await checkAccessibility(browser, 'v2-summary-page')
 
     await summaryPage.submitButton.click()
+  })
 
-    await expect(browser).toHaveTitle('Form submitted - e2e form - v2 - GOV.UK')
+  it('confirmation page should have no WCAG 2.2 AA violations', async () => {
+    await checkAccessibility(browser, 'v2-confirmation-page')
   })
 })
