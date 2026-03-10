@@ -2,6 +2,8 @@ import allure from 'allure-commandline'
 import { browser } from '@wdio/globals'
 
 const debug = process.env.DEBUG
+const chromedriverHostname = process.env.CHROMEDRIVER_URL
+const chromedriverPort = process.env.CHROMEDRIVER_PORT
 const oneMinute = 60 * 1000
 const oneHour = 60 * 60 * 1000
 
@@ -12,9 +14,13 @@ export const config = {
     ? `https://forms-runner.${process.env.ENVIRONMENT}.cdp-int.defra.cloud`
     : 'http://localhost:3009',
 
-  // Connection to remote chromedriver
-  hostname: process.env.CHROMEDRIVER_URL || '127.0.0.1',
-  port: process.env.CHROMEDRIVER_PORT || 4444,
+  ...(chromedriverHostname
+    ? {
+        // Connection to remote chromedriver
+        hostname: chromedriverHostname,
+        port: Number(chromedriverPort || 4444)
+      }
+    : {}),
 
   specs: ['./test/specs/**/*.a11y.js'],
   exclude: [],
@@ -42,7 +48,7 @@ export const config = {
 
   execArgv: debug ? ['--inspect'] : [],
 
-  logLevel: debug ? 'debug' : 'info',
+  logLevel: debug ? 'debug' : 'warn',
 
   // run all a11y specs even if some fail
   bail: 0,
