@@ -38,9 +38,9 @@ export const config = {
   // then the current working directory is where your `package.json` resides, so `wdio`
   // will be called from there.
   //
-  specs: ['./test/specs/**/*.js'],
+  specs: ['./test/specs/**/*.e2e.js', './test/specs/**/*.a11y.js'],
   // Patterns to exclude.
-  exclude: ['./test/specs/**/*.a11y.js'],
+  exclude: [],
   // injectGlobals: false,
   //
   // ============
@@ -58,6 +58,7 @@ export const config = {
   // and 30 processes will get spawned. The property handles how many capabilities
   // from the same test should run tests.
   //
+
   maxInstances: debug ? 1 : 10,
   //
   // If you have trouble getting all important capabilities together, check out the
@@ -67,7 +68,8 @@ export const config = {
 
   capabilities: [
     {
-      browserName: 'chrome'
+      browserName: 'chrome',
+      'wdio:enforceWebDriverClassic': true
     }
   ],
 

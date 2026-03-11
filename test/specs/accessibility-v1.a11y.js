@@ -72,7 +72,24 @@ describe('Accessibility - Register unicorn breeder form v1', () => {
     ])
     await policyStartDatePage.submitButton.click()
   })
+  it('upload file page should have no WCAG 2.2 AA violations', async () => {
+    await checkAccessibility(browser, 'v1-upload-file-page')
 
+    const filePath = path.join(__dirname, 'test/file/test-file.txt')
+    const remoteFilePath = browser.uploadFile(filePath)
+    await uploadFilePage.chooseFile.setValue(await remoteFilePath)
+    await uploadFilePage.uploadFile.click()
+
+    let fileUploaded = true
+    while (fileUploaded) {
+      const uploadedFileElem = uploadFilePage.checkForUploadedFile
+      if (await uploadedFileElem.isExisting()) {
+        fileUploaded = false
+      }
+    }
+
+    await uploadFilePage.submitButton.click()
+  })
   it('select number of unicorns page should have no WCAG 2.2 AA violations', async () => {
     await checkAccessibility(browser, 'v1-select-no-of-unicorns-page')
 
@@ -102,25 +119,6 @@ describe('Accessibility - Register unicorn breeder form v1', () => {
 
     await noOfUnicornsStaffPage.enterNoOfUnicornStaff.setValue('5')
     await noOfUnicornsStaffPage.submitButton.click()
-  })
-
-  it('upload file page should have no WCAG 2.2 AA violations', async () => {
-    await checkAccessibility(browser, 'v1-upload-file-page')
-
-    const filePath = path.join(__dirname, 'test/file/test-file.txt')
-    const remoteFilePath = browser.uploadFile(filePath)
-    await uploadFilePage.chooseFile.setValue(await remoteFilePath)
-    await uploadFilePage.uploadFile.click()
-
-    let fileUploaded = true
-    while (fileUploaded) {
-      const uploadedFileElem = uploadFilePage.checkForUploadedFile
-      if (await uploadedFileElem.isExisting()) {
-        fileUploaded = false
-      }
-    }
-
-    await uploadFilePage.submitButton.click()
   })
 
   it('summary page should have no WCAG 2.2 AA violations', async () => {
