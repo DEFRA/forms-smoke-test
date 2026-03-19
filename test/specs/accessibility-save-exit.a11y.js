@@ -28,9 +28,9 @@ describe('Accessibility - Save and exit flow', () => {
   it('save your progress page should have no WCAG 2.2 AA violations', async () => {
     await checkAccessibility(browser, 'save-exit-save-progress-page')
 
-    await saveYourProgressPage.emailAddressField.setValue('test@example.co.uk')
+    await saveYourProgressPage.emailAddressField.setValue('defraforms@defra.gov.uk')
     await saveYourProgressPage.confirmEmailAddressField.setValue(
-      'test@example.co.uk'
+      'defraforms@defra.gov.uk'
     )
     await saveYourProgressPage.securityQuestionMemorablePlace.click()
     await saveYourProgressPage.securityAnswerField.setValue('London')
