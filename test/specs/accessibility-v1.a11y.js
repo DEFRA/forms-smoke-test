@@ -40,7 +40,7 @@ describe('Accessibility - Register unicorn breeder form v1', () => {
   it('phone number page should have no WCAG 2.2 AA violations', async () => {
     await checkAccessibility(browser, 'v1-phone-number-page')
 
-    await phoneNumberPage.enterPhoneNumber.setValue('07779875')
+    await phoneNumberPage.enterPhoneNumber.setValue('07777777777')
     await phoneNumberPage.submitButton.click()
   })
 

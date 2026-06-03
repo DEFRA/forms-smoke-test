@@ -42,7 +42,7 @@ describe('Register unicorn breeder form - e2e', () => {
   })
 
   it('should enter phone number', async () => {
-    await phoneNumberPage.enterPhoneNumber.setValue('07779875')
+    await phoneNumberPage.enterPhoneNumber.setValue('07777777777')
     await phoneNumberPage.submitButton.click()
 
     await expect(browser).toHaveTitle(

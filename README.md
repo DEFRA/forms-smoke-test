@@ -25,7 +25,7 @@ Install application dependencies:
 npm install
 ```
 
-Create a form (if it doesn't exist)- Name should be `e2e form`
+Create 2 new form (if it doesn't exist)- Name should be `e2e form` and `e2e form - v2`
 
 And upload form json from - [test/file/register-as-a-unicorn-breeder.json](register-as-a-unicorn-breeder.json)
 
