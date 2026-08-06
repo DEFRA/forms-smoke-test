@@ -90,7 +90,6 @@ describe('Register unicorn breeder form - e2e', () => {
     const filePath = path.join(__dirname, 'test/file/test-file.txt')
     const remoteFilePath = browser.uploadFile(filePath)
     await uploadFilePage.chooseFile.setValue(await remoteFilePath)
-    await uploadFilePage.uploadFile.click()
 
     let fileUploaded = true
 

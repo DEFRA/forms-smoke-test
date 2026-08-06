@@ -79,7 +79,6 @@ describe('Accessibility - Register unicorn breeder form v2', () => {
     const filePath = path.join(__dirname, 'test/file/test-file.txt')
     const remoteFilePath = browser.uploadFile(filePath)
     await uploadFilePage.chooseFile.setValue(await remoteFilePath)
-    await uploadFilePage.uploadFile.click()
 
     let fileUploaded = true
     while (fileUploaded) {
