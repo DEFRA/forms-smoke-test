@@ -3,11 +3,13 @@ import { $ } from '@wdio/globals'
 
 class UploadFilePage extends Page {
   get chooseFile() {
+    // Force hidden file input element to be visible so that wdio can interact with it
+    document.getElementsByName('file')[0].style.display = 'block'
     return $('input[type="file"]')
   }
 
-  get uploadFile() {
-    return $('aria/Upload file')
+  get fileHolder() {
+    return $('//body/div/main/div/div/form[1]/div/div[2]/input')
   }
 
   get checkForUploadedFile() {
