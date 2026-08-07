@@ -5,10 +5,12 @@ class UploadFilePage extends Page {
   get chooseFile() {
     // Force hidden file input element to be visible so that wdio can interact with it
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    browser.executeScript(
-      `document.getElementsByName('file')[0].style.display = 'block';`,
-      []
-    )
+    browser.execute(() => {
+      const elements = document.getElementsByName('file')
+      if (elements.length) {
+        elements[0].style.display = 'block'
+      }
+    })
 
     return $('input[type="file"]')
   }
