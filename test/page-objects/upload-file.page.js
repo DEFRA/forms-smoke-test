@@ -1,10 +1,15 @@
 import { Page } from '~/test/page-objects/page.js'
-import { $ } from '@wdio/globals'
+import { $, browser } from '@wdio/globals'
 
 class UploadFilePage extends Page {
   get chooseFile() {
     // Force hidden file input element to be visible so that wdio can interact with it
-    document.getElementsByName('file')[0].style.display = 'block'
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    browser.executeScript(
+      `document.getElementsByName('file')[0].style.display = 'block';`,
+      []
+    )
+
     return $('input[type="file"]')
   }
 
