@@ -17,6 +17,27 @@ class SignInPage extends Page {
   get continueButton() {
     return $('aria/Continue')
   }
+
+  /**
+   * The sign-in step that the browser is on, found from the field that the
+   * page shows
+   * @returns {Promise<'email' | 'security code' | 'phone' | undefined>} the step, or undefined when the page is not a sign-in step
+   */
+  async step() {
+    if (await this.emailField.isDisplayed()) {
+      return 'email'
+    }
+
+    if (await this.securityCodeField.isDisplayed()) {
+      return 'security code'
+    }
+
+    if (await this.phoneField.isDisplayed()) {
+      return 'phone'
+    }
+
+    return undefined
+  }
 }
 
 export default new SignInPage()

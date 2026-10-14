@@ -19,9 +19,12 @@ describe('Sign in - e2e', () => {
   })
 
   it('asks a person with no session for an email address', async () => {
+    await expect(signInPage.step()).resolves.toBe('email')
+
     await signInPage.emailField.setValue(EMAIL)
     await signInPage.continueButton.click()
-    await expect(signInPage.securityCodeField).toBeDisplayed()
+
+    await expect(signInPage.step()).resolves.toBe('security code')
   })
 
   it('accepts the security code', async () => {
@@ -30,7 +33,7 @@ describe('Sign in - e2e', () => {
 
     // The first sign-in in an environment makes the account, and a new
     // account must give a phone number. Later sign-ins skip this page.
-    if (await signInPage.phoneField.isExisting()) {
+    if ((await signInPage.step()) === 'phone') {
       await signInPage.phoneField.setValue(PHONE)
       await signInPage.continueButton.click()
     }
