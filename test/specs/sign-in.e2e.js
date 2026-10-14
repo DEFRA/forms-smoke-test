@@ -18,7 +18,13 @@ describe('Sign in - e2e', () => {
     await homepagePage.open()
   })
 
-  it('asks a person with no session for an email address', async () => {
+  it('sends a person with no session to forms-identity-ui to sign in', async () => {
+    await expect(browser).toHaveUrl(
+      expect.stringMatching(`^${signInPage.url}/interaction/[^/]+/email$`)
+    )
+  })
+
+  it('asks for an email address', async () => {
     await expect(signInPage.emailField).toBeDisplayed()
 
     await signInPage.emailField.setValue(EMAIL)
@@ -43,7 +49,9 @@ describe('Sign in - e2e', () => {
   })
 
   it('shows the homepage of the form to the signed-in person', async () => {
-    await expect(browser).toHaveUrl(expect.stringContaining(homepagePage.path))
+    await expect(browser).toHaveUrl(
+      new URL(homepagePage.path, browser.options.baseUrl).href
+    )
     await expect(homepagePage.pageHeading).toHaveText('e2e form')
     await expect(homepagePage.signOutLink).toBeExisting()
   })
