@@ -5,6 +5,11 @@ const debug = process.env.DEBUG
 const oneMinute = 60 * 1000
 const oneHour = 60 * 60 * 1000
 
+// The local test harness values, so that the sign-in test can read the
+// security code from forms-identity-api
+process.env.IDENTITY_API_URL ??= 'http://localhost:3010'
+process.env.OTP_TEST_READ_SECRET ??= 'local-test-read-secret'
+
 export const config = {
   //
   // ====================

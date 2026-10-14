@@ -54,6 +54,20 @@ You can check the progress of the build under the actions section of this reposi
 
 The results of the test run are made available in the portal.
 
+### Sign-in test
+
+[test/specs/sign-in.e2e.js](test/specs/sign-in.e2e.js) signs in as `smoke-test@example.forms.defra.gov.uk` through forms-runner, forms-identity-ui and forms-identity-api. No email is sent to that address: the test reads the security code from forms-identity-api. It then signs out.
+
+The environment must have:
+
+- `USE_SIGN_IN_FEATURE=true` on forms-runner
+- `OTP_TEST_READ_SECRET` on forms-identity-api and on this test suite, with the same value
+- `IDENTITY_API_URL` on this test suite, the URL of forms-identity-api in that environment (for example `https://forms-identity-api.prod.cdp-int.defra.cloud`)
+
+[wdio.local.conf.js](wdio.local.conf.js) sets both values for the local test harness.
+
+forms-identity-api locks the address for 2 hours after 5 requests for a code in 2 hours with no sign-in that completes. To continue before then, remove the address from the `otp-lockouts` collection of forms-identity-api in that environment.
+
 ## Requirements of CDP Environment Tests
 
 1. Your service builds as a docker container using the `.github/workflows/publish.yml`
