@@ -62,8 +62,7 @@ The environment must have:
 
 - `USE_SIGN_IN_FEATURE=true` on forms-runner
 - `OTP_TEST_READ_SECRET` on forms-identity-api and on this test suite, with the same value
-
-For a local run, set `OTP_TEST_READ_SECRET` and `IDENTITY_API_URL` (for example `http://localhost:3010`).
+- `IDENTITY_API_URL` on this test suite, the URL of forms-identity-api in that environment (for example `https://forms-identity-api.prod.cdp-int.defra.cloud`, or `http://localhost:3010` for a local run)
 
 forms-identity-api locks the address for 2 hours after 5 requests for a code in 2 hours with no sign-in that completes. To continue before then, remove the address from the `otp-lockouts` collection of forms-identity-api in that environment.
 
