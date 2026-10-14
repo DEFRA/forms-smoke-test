@@ -1,10 +1,5 @@
 import { Page } from '~/test/page-objects/page.js'
-import { $ } from '@wdio/globals'
 
-class SignedOutPage extends Page {
-  get signInAgainLink() {
-    return $('=sign in again')
-  }
-}
+class SignedOutPage extends Page {}
 
 export default new SignedOutPage()

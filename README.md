@@ -56,15 +56,13 @@ The results of the test run are made available in the portal.
 
 ### Sign-in test
 
-[test/specs/sign-in.e2e.js](test/specs/sign-in.e2e.js) signs in as `smoke-test@example.forms.defra.gov.uk` through forms-runner, forms-identity-ui and forms-identity-api. No email is sent to that address: the test reads the security code from forms-identity-api.
+[test/specs/sign-in.e2e.js](test/specs/sign-in.e2e.js) signs in as `smoke-test@example.forms.defra.gov.uk` through forms-runner, forms-identity-ui and forms-identity-api. No email is sent to that address: the test reads the security code from forms-identity-api. It then signs out.
 
 The environment must have:
 
 - `USE_SIGN_IN_FEATURE=true` on forms-runner
 - `OTP_TEST_READ_SECRET` on forms-identity-api and on this test suite, with the same value
-- `RUNNER_URL` on this test suite, the URL of forms-runner in that environment (for a local run, `http://localhost:3009`)
 - `IDENTITY_API_URL` on this test suite, the URL of forms-identity-api in that environment (for example `https://forms-identity-api.prod.cdp-int.defra.cloud`, or `http://localhost:3010` for a local run)
-- `IDENTITY_UI_URL` on this test suite, the URL of forms-identity-ui that forms-runner sends the browser to for sign-in (for a local run, `http://identity.127.0.0.1.sslip.io:3011`)
 
 forms-identity-api locks the address for 2 hours after 5 requests for a code in 2 hours with no sign-in that completes. To continue before then, remove the address from the `otp-lockouts` collection of forms-identity-api in that environment.
 

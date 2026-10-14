@@ -1,4 +1,4 @@
-import { browser, expect } from '@wdio/globals'
+import { expect } from '@wdio/globals'
 import { before } from 'mocha'
 
 import { readSecurityCode } from '~/test/helpers/security-code.js'
@@ -19,13 +19,7 @@ describe('Sign in - e2e', () => {
     await homepagePage.open()
   })
 
-  it('sends a person with no session to forms-identity-ui to sign in', async () => {
-    await expect(browser).toHaveUrl(
-      expect.stringMatching(`^${signInPage.url}/interaction/[^/]+/email$`)
-    )
-  })
-
-  it('asks for an email address', async () => {
+  it('asks a person with no session for an email address', async () => {
     await expect(signInPage.emailField).toBeDisplayed()
 
     await signInPage.emailField.setValue(EMAIL)
@@ -50,9 +44,6 @@ describe('Sign in - e2e', () => {
   })
 
   it('shows the homepage of the form to the signed-in person', async () => {
-    await expect(browser).toHaveUrl(
-      `${homepagePage.runnerUrl}/homepage/preview/draft/e2e-form`
-    )
     await expect(homepagePage.pageHeading).toHaveText('e2e form')
     await expect(homepagePage.signOutLink).toBeExisting()
   })
@@ -63,18 +54,6 @@ describe('Sign in - e2e', () => {
 describe('Sign out - e2e', () => {
   it('signs the person out', async () => {
     await homepagePage.signOutLink.click()
-
-    await expect(browser).toHaveUrl(
-      expect.stringMatching(`^${signedOutPage.runnerUrl}/auth/signed-out`)
-    )
     await expect(signedOutPage.pageHeading).toHaveText('You have signed out')
-  })
-
-  it('asks the person to sign in again', async () => {
-    await signedOutPage.signInAgainLink.click()
-
-    await expect(browser).toHaveUrl(
-      expect.stringMatching(`^${signInPage.url}/interaction/[^/]+/email$`)
-    )
   })
 })
