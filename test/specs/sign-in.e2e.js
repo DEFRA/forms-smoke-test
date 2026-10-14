@@ -29,18 +29,21 @@ describe('Sign in - e2e', () => {
   it('accepts the security code', async () => {
     await signInPage.securityCodeField.setValue(await readSecurityCode(EMAIL))
     await signInPage.continueButton.click()
+    await expect(signInPage.securityCodeField).not.toBeExisting()
+  })
 
+  it('asks a new account for a phone number', async () => {
     // The first sign-in in an environment makes the account, and a new
     // account must give a phone number. Later sign-ins skip this page.
     if (await signInPage.phoneField.isExisting()) {
       await signInPage.phoneField.setValue(PHONE)
       await signInPage.continueButton.click()
+      await expect(signInPage.phoneField).not.toBeExisting()
     }
-
-    await expect(browser).toHaveUrl(expect.stringContaining(homepagePage.path))
   })
 
   it('shows the homepage of the form to the signed-in person', async () => {
+    await expect(browser).toHaveUrl(expect.stringContaining(homepagePage.path))
     await expect(homepagePage.pageHeading).toHaveText('e2e form')
     await expect(homepagePage.signOutLink).toBeExisting()
   })
