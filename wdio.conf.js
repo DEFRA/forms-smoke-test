@@ -1,5 +1,7 @@
 import { browser } from '@wdio/globals'
 
+import { selectSpecs } from './specs.conf.js'
+
 const debug = process.env.DEBUG
 const oneHour = 60 * 60 * 1000
 
@@ -38,7 +40,7 @@ export const config = {
   // then the current working directory is where your `package.json` resides, so `wdio`
   // will be called from there.
   //
-  specs: ['./test/specs/**/*.e2e.js', './test/specs/**/*.a11y.js'],
+  specs: selectSpecs(),
   // Patterns to exclude.
   exclude: [],
   // injectGlobals: false,
