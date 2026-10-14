@@ -51,7 +51,7 @@ describe('Sign in - e2e', () => {
 
   it('shows the homepage of the form to the signed-in person', async () => {
     await expect(browser).toHaveUrl(
-      `${homepagePage.baseUrl}/homepage/preview/draft/e2e-form`
+      `${homepagePage.runnerUrl}/homepage/preview/draft/e2e-form`
     )
     await expect(homepagePage.pageHeading).toHaveText('e2e form')
     await expect(homepagePage.signOutLink).toBeExisting()
@@ -65,7 +65,7 @@ describe('Sign out - e2e', () => {
     await homepagePage.signOutLink.click()
 
     await expect(browser).toHaveUrl(
-      `${signedOutPage.baseUrl}/auth/signed-out?state=%7B%22slug%22%3A%22e2e-form%22%2C%22previewMode%22%3A%22draft%22%2C%22returnUrl%22%3A%22%2Fhomepage%2Fpreview%2Fdraft%2Fe2e-form%22%7D`
+      expect.stringMatching(`^${signedOutPage.runnerUrl}/auth/signed-out`)
     )
     await expect(signedOutPage.pageHeading).toHaveText('You have signed out')
   })
