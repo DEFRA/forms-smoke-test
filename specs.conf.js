@@ -1,9 +1,6 @@
 /**
  * Selects the specs for the save-and-exit flow that forms-runner has in the
  * environment. forms-runner reads the same USE_SIGN_IN_FEATURE flag.
- *
- * A function rather than a constant, so that wdio.local.conf.js can set the
- * flag before the selection reads it.
  * @returns {(string | string[])[]} the specs for the wdio config
  */
 export function selectSpecs() {
