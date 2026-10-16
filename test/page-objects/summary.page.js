@@ -2,9 +2,7 @@ import { FormPage } from '~/test/page-objects/form.page.js'
 import { $ } from '@wdio/globals'
 
 class SummaryPage extends FormPage {
-  open() {
-    return super.open(this.formPath('/form', '/summary'))
-  }
+  suffix = '/summary'
 
   get summary() {
     return $('aria/Summary')
@@ -20,10 +18,6 @@ class SummaryPage extends FormPage {
 
   get submitButton() {
     return $('aria/Submit')
-  }
-
-  get saveAndExit() {
-    return $('button=Save and exit')
   }
 
   /**

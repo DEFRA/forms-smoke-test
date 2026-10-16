@@ -1,10 +1,18 @@
 import { Page } from '~/test/page-objects/page.js'
+import { $ } from '@wdio/globals'
 
 /**
  * A page that belongs to one form. The page object knows the form, so that
  * `open()` needs no arguments.
  */
 class FormPage extends Page {
+  // The part of the path before the slug. A page that is not at `/form` sets
+  // its own value.
+  prefix = '/form'
+
+  // The part of the path after the slug, for example `/summary`
+  suffix = ''
+
   /**
    * @param {object} form
    * @param {string} form.slug - the slug of the form
@@ -18,14 +26,13 @@ class FormPage extends Page {
     this.state = state
   }
 
-  /**
-   * The path of a page of this form
-   * @param {string} prefix - the part of the path before the slug, for example `/form`
-   * @param {string} [suffix] - the part of the path after the slug, for example `/summary`
-   */
-  formPath(prefix, suffix = '') {
+  open() {
     const preview = this.preview ? `/preview/${this.state}` : ''
-    return `${prefix}${preview}/${this.slug}${suffix}`
+    return super.open(`${this.prefix}${preview}/${this.slug}${this.suffix}`)
+  }
+
+  get saveAndExit() {
+    return $('button=Save and exit')
   }
 }
 

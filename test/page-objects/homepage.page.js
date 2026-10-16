@@ -2,9 +2,7 @@ import { FormPage } from '~/test/page-objects/form.page.js'
 import { $, $$ } from '@wdio/globals'
 
 class HomepagePage extends FormPage {
-  open() {
-    return super.open(this.formPath('/homepage'))
-  }
+  prefix = '/homepage'
 
   get signOutLink() {
     return $('=Sign out')
