@@ -5,7 +5,7 @@ class SummaryPage extends Page {
   /**
    * @param {string} slug - the slug of the form
    */
-  open(slug) {
+  openPreviewDraft(slug) {
     return super.open(`/form/preview/draft/${slug}/summary`)
   }
 
