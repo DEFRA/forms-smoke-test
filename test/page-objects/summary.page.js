@@ -1,12 +1,9 @@
-import { Page } from '~/test/page-objects/page.js'
+import { FormPage } from '~/test/page-objects/form.page.js'
 import { $ } from '@wdio/globals'
 
-class SummaryPage extends Page {
-  /**
-   * @param {string} slug - the slug of the form
-   */
-  openPreviewDraft(slug) {
-    return super.open(`/form/preview/draft/${slug}/summary`)
+class SummaryPage extends FormPage {
+  open() {
+    return super.open(this.formPath('/form', '/summary'))
   }
 
   get summary() {
@@ -39,4 +36,6 @@ class SummaryPage extends Page {
   }
 }
 
-export default new SummaryPage()
+export const summaryV2Page = new SummaryPage({ slug: 'e2e-form-v2' })
+
+export default new SummaryPage({ slug: 'e2e-form' })

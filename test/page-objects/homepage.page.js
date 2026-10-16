@@ -1,15 +1,9 @@
-import { Page } from '~/test/page-objects/page.js'
+import { FormPage } from '~/test/page-objects/form.page.js'
 import { $, $$ } from '@wdio/globals'
 
-class HomepagePage extends Page {
-  path = '/homepage/preview/draft/e2e-form'
-
+class HomepagePage extends FormPage {
   open() {
-    return super.open(this.path)
-  }
-
-  openV2() {
-    return super.open('/homepage/preview/draft/e2e-form-v2')
+    return super.open(this.formPath('/homepage'))
   }
 
   get signOutLink() {
@@ -23,4 +17,6 @@ class HomepagePage extends Page {
   }
 }
 
-export default new HomepagePage()
+export const homepageV2Page = new HomepagePage({ slug: 'e2e-form-v2' })
+
+export default new HomepagePage({ slug: 'e2e-form' })
