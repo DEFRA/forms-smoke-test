@@ -4,6 +4,7 @@ Needs to have a form name - Do not use - Used for Automated Tests in your enviro
 
 The template to create a service that runs WDIO tests against an environment.
 
+- [Scenarios](#scenarios)
 - [Requirements](#requirements)
   - [Node.js](#nodejs)
 - [Local](#local)
@@ -14,6 +15,30 @@ The template to create a service that runs WDIO tests against an environment.
   - [Debugging tests](#debugging-tests)
 - [Licence](#licence)
   - [About the licence](#about-the-licence)
+
+## Scenarios
+
+Every run:
+
+- Fill in and submit the e2e form (preview, draft)
+- Fill in and submit the e2e form - v2 (preview, draft)
+- Each page of both forms has no WCAG 2.2 AA accessibility errors, from the first question to the confirmation page
+
+When `USE_SIGN_IN_FEATURE` is not `true`:
+
+- Save the e2e form part way through, with an email address and a security question
+- Each page of the save journey has no WCAG 2.2 AA accessibility errors
+
+When `USE_SIGN_IN_FEATURE` is `true`:
+
+- Sign in with an email address and a security code
+- Give a phone number, on the first sign-in only
+- See the form homepage when signed in
+- Save the e2e form - v2 from the check your answers page, with no security question
+- See the saved form on the homepage
+- Continue the saved form from the homepage
+- See all the saved answers on the check your answers page
+- Sign out
 
 ## Local Development
 
@@ -54,17 +79,29 @@ You can check the progress of the build under the actions section of this reposi
 
 The results of the test run are made available in the portal.
 
+### Save and exit tests
+
+forms-runner has 2 save-and-exit flows. Its `USE_SIGN_IN_FEATURE` flag selects one. This test suite reads a flag with the same name, and [specs.conf.js](specs.conf.js) selects the specs for that flow:
+
+- Flag not set, or not `true`: the specs in [test/specs/memorable-word](test/specs/memorable-word). They save the form with an email address and a security question.
+- Flag `true`: the specs in [test/specs/sign-in](test/specs/sign-in). They run in this order, in one browser, so that each spec uses the session of the sign-in spec:
+  1. `sign-in.e2e.js` signs in.
+  2. `save-and-resume.e2e.js` completes the e2e form - v2, saves it from the summary page, resumes it from the homepage, and then checks the answers on the summary page.
+  3. `sign-out.e2e.js` signs out.
+
+Set `USE_SIGN_IN_FEATURE` on this test suite to the same value as on forms-runner in that environment. [wdio.local.conf.js](wdio.local.conf.js) sets it to `true` for the local test harness.
+
 ### Sign-in test
 
-[test/specs/sign-in.e2e.js](test/specs/sign-in.e2e.js) signs in as `smoke-test@example.forms.defra.gov.uk` through forms-runner, forms-identity-ui and forms-identity-api. No email is sent to that address: the test reads the security code from forms-identity-api. It then signs out.
+[test/specs/sign-in/sign-in.e2e.js](test/specs/sign-in/sign-in.e2e.js) signs in as `smoke-test@example.forms.defra.gov.uk` through forms-runner, forms-identity-ui and forms-identity-api. No email is sent to that address: the test reads the security code from forms-identity-api.
 
 The environment must have:
 
-- `USE_SIGN_IN_FEATURE=true` on forms-runner
+- `USE_SIGN_IN_FEATURE=true` on forms-runner and on this test suite
 - `OTP_TEST_READ_SECRET` on forms-identity-api and on this test suite, with the same value
 - `IDENTITY_API_URL` on this test suite, the URL of forms-identity-api in that environment (for example `https://forms-identity-api.prod.cdp-int.defra.cloud`)
 
-[wdio.local.conf.js](wdio.local.conf.js) sets both values for the local test harness.
+[wdio.local.conf.js](wdio.local.conf.js) sets these values for the local test harness.
 
 forms-identity-api locks the address for 2 hours after 5 requests for a code in 2 hours with no sign-in that completes. To continue before then, remove the address from the `otp-lockouts` collection of forms-identity-api in that environment.
 

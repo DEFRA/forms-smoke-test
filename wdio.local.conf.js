@@ -1,6 +1,8 @@
 import allure from 'allure-commandline'
 import { browser } from '@wdio/globals'
 
+import { selectSpecs } from './specs.conf.js'
+
 const debug = process.env.DEBUG
 const oneMinute = 60 * 1000
 const oneHour = 60 * 60 * 1000
@@ -9,6 +11,9 @@ const oneHour = 60 * 60 * 1000
 // security code from forms-identity-api
 process.env.IDENTITY_API_URL ??= 'http://localhost:3010'
 process.env.OTP_TEST_READ_SECRET ??= 'local-test-read-secret'
+
+// The local test harness runs forms-runner with sign-in
+process.env.USE_SIGN_IN_FEATURE ??= 'true'
 
 export const config = {
   //
@@ -33,7 +38,7 @@ export const config = {
   // then the current working directory is where your `package.json` resides, so `wdio`
   // will be called from there.
   //
-  specs: ['./test/specs/**/*.e2e.js', './test/specs/**/*.a11y.js'],
+  specs: selectSpecs(),
   // Patterns to exclude.
   exclude: [
     // 'path/to/excluded/files'
