@@ -4,6 +4,7 @@ Needs to have a form name - Do not use - Used for Automated Tests in your enviro
 
 The template to create a service that runs WDIO tests against an environment.
 
+- [Scenarios](#scenarios)
 - [Requirements](#requirements)
   - [Node.js](#nodejs)
 - [Local](#local)
@@ -14,6 +15,30 @@ The template to create a service that runs WDIO tests against an environment.
   - [Debugging tests](#debugging-tests)
 - [Licence](#licence)
   - [About the licence](#about-the-licence)
+
+## Scenarios
+
+Every run:
+
+- Fill in and submit the e2e form (preview, draft)
+- Fill in and submit the e2e form - v2 (preview, draft)
+- Each page of both forms has no WCAG 2.2 AA accessibility errors, from the first question to the confirmation page
+
+When `USE_SIGN_IN_FEATURE` is not `true`:
+
+- Save the e2e form part way through, with an email address and a security question
+- Each page of the save journey has no WCAG 2.2 AA accessibility errors
+
+When `USE_SIGN_IN_FEATURE` is `true`:
+
+- Sign in with an email address and a security code
+- Give a phone number, on the first sign-in only
+- See the form homepage when signed in
+- Save the e2e form - v2 from the check your answers page, with no security question
+- See the saved form on the homepage
+- Continue the saved form from the homepage
+- See all the saved answers on the check your answers page
+- Sign out
 
 ## Local Development
 
