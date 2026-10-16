@@ -1,4 +1,4 @@
-import { $, browser, expect } from '@wdio/globals'
+import { browser, expect } from '@wdio/globals'
 import { before } from 'mocha'
 
 import { completeE2eFormV2 } from '~/test/helpers/e2e-form-v2.js'
@@ -15,29 +15,23 @@ const NAME = `Smoke Test ${String(Date.now())}`
 const SAVED_FORM_TIMEOUT = 5 * 60 * 1000
 
 /**
- * The resume link of each saved form on the homepage
- * @returns {Promise<string[]>}
+ * The resume link of the newest saved form on the homepage
+ * @returns {Promise<string | null>} null when the homepage has no saved form to resume
  */
-async function readResumeLinks() {
+async function readLatestResumeLink() {
   await homepageV2Page.open()
-  const hrefs = []
-  for (const link of await homepageV2Page.continueLinks.getElements()) {
-    hrefs.push(await link.getAttribute('href'))
-  }
-  return hrefs
+  const link = homepageV2Page.latestContinueLink
+  return (await link.isExisting()) ? link.getAttribute('href') : null
 }
 
-/** @type {string[]} */
-let resumeLinksBefore
-
-/** @type {string | undefined} */
-let resumeLink
+/** @type {string | null} */
+let latestResumeLinkBefore
 
 // Runs after the sign-in spec in the same browser, so the person starts
 // signed in
 describe('Save and exit when signed in - e2e', () => {
   before(async () => {
-    resumeLinksBefore = await readResumeLinks()
+    latestResumeLinkBefore = await readLatestResumeLink()
   })
 
   it('saves the answers without the security question', async () => {
@@ -53,15 +47,10 @@ describe('Resume when signed in - e2e', () => {
     // Longer than the wait, so that the wait gives its own message
     this.timeout(SAVED_FORM_TIMEOUT + 30_000)
 
-    // The saved form of this run is the one with a link that was not there
-    // before the save, rather than a row at a given position
+    // The account keeps the saved forms of earlier runs. The save of this run
+    // is on the homepage when the newest resume link is a different link.
     await browser.waitUntil(
-      async () => {
-        resumeLink = (await readResumeLinks()).find(
-          (link) => !resumeLinksBefore.includes(link)
-        )
-        return resumeLink !== undefined
-      },
+      async () => (await readLatestResumeLink()) !== latestResumeLinkBefore,
       {
         timeout: SAVED_FORM_TIMEOUT,
         interval: 5000,
@@ -71,7 +60,7 @@ describe('Resume when signed in - e2e', () => {
   })
 
   it('resumes the saved form', async () => {
-    await $(`a[href="${String(resumeLink)}"]`).click()
+    await homepageV2Page.latestContinueLink.click()
 
     await expect(browser).toHaveTitle(
       'Welcome back to your form - e2e form - v2 - GOV.UK'
