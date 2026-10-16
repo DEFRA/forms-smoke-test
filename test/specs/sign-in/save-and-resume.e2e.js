@@ -82,7 +82,7 @@ describe('Resume when signed in - e2e', () => {
     // The engine sends a person with missing answers back to the first
     // question with no answer. The summary page shows only when all the
     // answers loaded.
-    await summaryPage.openV2()
+    await summaryPage.open('e2e-form-v2')
     await expect(browser).toHaveTitle(
       'Check your answers before sending your form - e2e form - v2 - GOV.UK'
     )

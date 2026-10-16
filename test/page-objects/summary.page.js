@@ -1,9 +1,12 @@
 import { Page } from '~/test/page-objects/page.js'
-import { $, browser } from '@wdio/globals'
+import { $ } from '@wdio/globals'
 
 class SummaryPage extends Page {
-  openV2() {
-    return browser.url('/form/preview/draft/e2e-form-v2/summary')
+  /**
+   * @param {string} slug - the slug of the form
+   */
+  open(slug) {
+    return super.open(`/form/preview/draft/${slug}/summary`)
   }
 
   get summary() {
