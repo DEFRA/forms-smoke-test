@@ -2,6 +2,11 @@ import { browser, expect } from '@wdio/globals'
 import { before } from 'mocha'
 
 import { completeE2eFormV2 } from '~/test/helpers/e2e-form-v2.js'
+import {
+  readLatestResumeHref,
+  SAVED_FORM_TIMEOUT,
+  waitForNewSaveAndExitLink
+} from '~/test/helpers/save-and-exit.js'
 import { homepageV2Page } from '~/test/page-objects/homepage.page.js'
 import saveConfirmationPage from '~/test/page-objects/save-confirmation.page.js'
 import { summaryV2Page } from '~/test/page-objects/summary.page.js'
@@ -10,22 +15,6 @@ import { summaryV2Page } from '~/test/page-objects/summary.page.js'
 // is different for each run shows that the resumed answers are from this run.
 const NAME = `Smoke Test ${String(Date.now())}`
 
-// forms-runner saves the form through SNS and SQS, so the saved form can take
-// some minutes to show on the homepage
-const SAVED_FORM_TIMEOUT = 5 * 60 * 1000
-
-/**
- * The href of the resume link of the newest saved form on the homepage
- * @returns {Promise<string | null>} null when the account has no saved form, which is the case on the first run in an environment
- */
-async function readLatestResumeHref() {
-  await homepageV2Page.open()
-  if (!(await homepageV2Page.hasResumeLink())) {
-    return null
-  }
-  return (await homepageV2Page.latestContinueLink()).getAttribute('href')
-}
-
 /** @type {string | null} */
 let latestResumeHrefBefore
 
@@ -33,7 +22,7 @@ let latestResumeHrefBefore
 // signed in
 describe('Save and exit when signed in - e2e', () => {
   before(async () => {
-    latestResumeHrefBefore = await readLatestResumeHref()
+    latestResumeHrefBefore = await readLatestResumeHref(homepageV2Page)
   })
 
   it('saves the answers without the security question', async () => {
@@ -51,16 +40,7 @@ describe('Resume when signed in - e2e', () => {
     // fail with its own message, rather than a mocha timeout.
     this.timeout(SAVED_FORM_TIMEOUT + 30_000)
 
-    // The account keeps the saved forms of earlier runs. The save of this run
-    // is on the homepage when the newest resume link is a different link.
-    await browser.waitUntil(
-      async () => (await readLatestResumeHref()) !== latestResumeHrefBefore,
-      {
-        timeout: SAVED_FORM_TIMEOUT,
-        interval: 5000,
-        timeoutMsg: 'the saved form did not show on the homepage'
-      }
-    )
+    await waitForNewSaveAndExitLink(homepageV2Page, latestResumeHrefBefore)
   })
 
   it('resumes the saved form', async () => {
