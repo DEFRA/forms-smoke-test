@@ -33,7 +33,9 @@ class SummaryPage extends Page {
    * @param {string} question - the text of the summary list key
    */
   answer(question) {
-    return $(`//dt[normalize-space()="${question}"]/following-sibling::dd[1]`)
+    return $(`dt.govuk-summary-list__key=${question}`)
+      .parentElement()
+      .$('.govuk-summary-list__value')
   }
 }
 
