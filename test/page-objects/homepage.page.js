@@ -14,32 +14,22 @@ class HomepagePage extends FormPage {
     return $$('*=Continue')
   }
 
+  // Whether the account has a saved form to resume
+  async hasResumeLink() {
+    return (await this.continueLinks.getElements()).length > 0
+  }
+
   // The table puts the saved forms in the order that they expire, the soonest
   // first, and an expired form has no link. Each save expires the same number
   // of days after it is made, so the last link is for the newest save. The
   // newest save can be from an earlier run, so a test that needs its own save
   // compares the link from before and after the save.
-  async #latestContinueLink() {
-    const links = await this.continueLinks.getElements()
-    return links.at(-1)
-  }
-
-  /**
-   * The href of the resume link of the newest saved form
-   * @returns {Promise<string | null>} null when the account has no saved form to resume
-   */
-  async latestResumeHref() {
-    const link = await this.#latestContinueLink()
-    return link ? link.getAttribute('href') : null
-  }
-
-  // Opens the newest saved form
-  async resumeLatestForm() {
-    const link = await this.#latestContinueLink()
+  async latestContinueLink() {
+    const link = (await this.continueLinks.getElements()).at(-1)
     if (!link) {
       throw new Error('the homepage has no saved form to resume')
     }
-    await link.click()
+    return link
   }
 }
 

@@ -16,10 +16,14 @@ const SAVED_FORM_TIMEOUT = 5 * 60 * 1000
 
 /**
  * The href of the resume link of the newest saved form on the homepage
+ * @returns {Promise<string | null>} null when the account has no saved form, which is the case on the first run in an environment
  */
 async function readLatestResumeHref() {
   await homepageV2Page.open()
-  return homepageV2Page.latestResumeHref()
+  if (!(await homepageV2Page.hasResumeLink())) {
+    return null
+  }
+  return (await homepageV2Page.latestContinueLink()).getAttribute('href')
 }
 
 /** @type {string | null} */
@@ -60,7 +64,7 @@ describe('Resume when signed in - e2e', () => {
   })
 
   it('resumes the saved form', async () => {
-    await homepageV2Page.resumeLatestForm()
+    await (await homepageV2Page.latestContinueLink()).click()
 
     await expect(browser).toHaveTitle(
       'Welcome back to your form - e2e form - v2 - GOV.UK'
