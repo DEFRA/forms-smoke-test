@@ -44,7 +44,9 @@ describe('Save and exit when signed in - e2e', () => {
 
 describe('Resume when signed in - e2e', () => {
   it('shows the saved form on the homepage', async function () {
-    // Longer than the wait, so that the wait gives its own message
+    // The wdio config gives each test 60 seconds, which is less than the
+    // wait. A longer limit for this test lets the wait run to its end and
+    // fail with its own message, rather than a mocha timeout.
     this.timeout(SAVED_FORM_TIMEOUT + 30_000)
 
     // The account keeps the saved forms of earlier runs. The save of this run
