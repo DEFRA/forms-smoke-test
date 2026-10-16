@@ -15,23 +15,21 @@ const NAME = `Smoke Test ${String(Date.now())}`
 const SAVED_FORM_TIMEOUT = 5 * 60 * 1000
 
 /**
- * The resume link of the newest saved form on the homepage
- * @returns {Promise<string | null>} null when the homepage has no saved form to resume
+ * The href of the resume link of the newest saved form on the homepage
  */
-async function readLatestResumeLink() {
+async function readLatestResumeHref() {
   await homepageV2Page.open()
-  const link = homepageV2Page.latestContinueLink
-  return (await link.isExisting()) ? link.getAttribute('href') : null
+  return homepageV2Page.latestResumeHref()
 }
 
 /** @type {string | null} */
-let latestResumeLinkBefore
+let latestResumeHrefBefore
 
 // Runs after the sign-in spec in the same browser, so the person starts
 // signed in
 describe('Save and exit when signed in - e2e', () => {
   before(async () => {
-    latestResumeLinkBefore = await readLatestResumeLink()
+    latestResumeHrefBefore = await readLatestResumeHref()
   })
 
   it('saves the answers without the security question', async () => {
@@ -52,7 +50,7 @@ describe('Resume when signed in - e2e', () => {
     // The account keeps the saved forms of earlier runs. The save of this run
     // is on the homepage when the newest resume link is a different link.
     await browser.waitUntil(
-      async () => (await readLatestResumeLink()) !== latestResumeLinkBefore,
+      async () => (await readLatestResumeHref()) !== latestResumeHrefBefore,
       {
         timeout: SAVED_FORM_TIMEOUT,
         interval: 5000,
@@ -62,7 +60,7 @@ describe('Resume when signed in - e2e', () => {
   })
 
   it('resumes the saved form', async () => {
-    await homepageV2Page.latestContinueLink.click()
+    await homepageV2Page.resumeLatestForm()
 
     await expect(browser).toHaveTitle(
       'Welcome back to your form - e2e form - v2 - GOV.UK'
