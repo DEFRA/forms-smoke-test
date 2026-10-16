@@ -43,6 +43,9 @@ class HomepagePage extends FormPage {
   }
 }
 
-export const homepageV2Page = new HomepagePage({ slug: 'e2e-form-v2' })
+export const homepageV2Page = new HomepagePage({
+  slug: 'e2e-form-v2',
+  state: 'draft'
+})
 
-export default new HomepagePage({ slug: 'e2e-form' })
+export default new HomepagePage({ slug: 'e2e-form', state: 'draft' })

@@ -16,18 +16,16 @@ class FormPage extends Page {
   /**
    * @param {object} form
    * @param {string} form.slug - the slug of the form
-   * @param {boolean} [form.preview] - open the preview of the form rather than the form that people use
-   * @param {'draft' | 'live'} [form.state] - the state of the form to preview
+   * @param {'draft' | 'live'} [form.state] - the state of the form to preview. With no state, the page is on the form that people use.
    */
-  constructor({ slug, preview = true, state = 'draft' }) {
+  constructor({ slug, state }) {
     super()
     this.slug = slug
-    this.preview = preview
     this.state = state
   }
 
   open() {
-    const preview = this.preview ? `/preview/${this.state}` : ''
+    const preview = this.state ? `/preview/${this.state}` : ''
     return super.open(`${this.prefix}${preview}/${this.slug}${this.suffix}`)
   }
 

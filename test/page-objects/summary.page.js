@@ -30,6 +30,9 @@ class SummaryPage extends FormPage {
   }
 }
 
-export const summaryV2Page = new SummaryPage({ slug: 'e2e-form-v2' })
+export const summaryV2Page = new SummaryPage({
+  slug: 'e2e-form-v2',
+  state: 'draft'
+})
 
-export default new SummaryPage({ slug: 'e2e-form' })
+export default new SummaryPage({ slug: 'e2e-form', state: 'draft' })
