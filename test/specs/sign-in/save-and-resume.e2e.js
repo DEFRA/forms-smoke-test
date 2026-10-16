@@ -3,7 +3,7 @@ import { before } from 'mocha'
 
 import { completeE2eFormV2 } from '~/test/helpers/e2e-form-v2.js'
 import {
-  readLatestResumeHref,
+  readResumeHrefs,
   SAVED_FORM_TIMEOUT,
   waitForNewSaveAndExitLink
 } from '~/test/helpers/save-and-exit.js'
@@ -15,14 +15,17 @@ import { summaryV2Page } from '~/test/page-objects/summary.page.js'
 // is different for each run shows that the resumed answers are from this run.
 const NAME = `Smoke Test ${String(Date.now())}`
 
-/** @type {string | null} */
-let latestResumeHrefBefore
+/** @type {string[]} */
+let resumeHrefsBefore
+
+/** @type {string} */
+let newResumeHref
 
 // Runs after the sign-in spec in the same browser, so the person starts
 // signed in
 describe('Save and exit when signed in - e2e', () => {
   before(async () => {
-    latestResumeHrefBefore = await readLatestResumeHref(homepageV2Page)
+    resumeHrefsBefore = await readResumeHrefs(homepageV2Page)
   })
 
   it('saves the answers without the security question', async () => {
@@ -34,17 +37,19 @@ describe('Save and exit when signed in - e2e', () => {
 })
 
 describe('Resume when signed in - e2e', () => {
-  it('shows the saved form on the homepage', async function () {
-    // The wdio config gives each test 60 seconds, which is less than the
-    // wait. A longer limit for this test lets the wait run to its end and
-    // fail with its own message, rather than a mocha timeout.
-    this.timeout(SAVED_FORM_TIMEOUT + 30_000)
-
-    await waitForNewSaveAndExitLink(homepageV2Page, latestResumeHrefBefore)
-  })
+  // The wdio config gives each test 60 seconds, which is less than the wait.
+  // A longer limit for this test lets the wait run to its end and fail with
+  // its own message, rather than a timeout. The limit is set on the test
+  // before it starts, because wdio reads the limit when the test starts.
+  it('shows the saved form on the homepage', async () => {
+    newResumeHref = await waitForNewSaveAndExitLink(
+      homepageV2Page,
+      resumeHrefsBefore
+    )
+  }).timeout(SAVED_FORM_TIMEOUT + 30_000)
 
   it('resumes the saved form', async () => {
-    await (await homepageV2Page.latestContinueLink()).click()
+    await homepageV2Page.resumeForm(newResumeHref)
 
     await expect(browser).toHaveTitle(
       'Welcome back to your form - e2e form - v2 - GOV.UK'

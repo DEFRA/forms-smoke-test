@@ -5,29 +5,30 @@ import { browser } from '@wdio/globals'
 export const SAVED_FORM_TIMEOUT = 5 * 60 * 1000
 
 /**
- * Opens the homepage and reads the href of the resume link of the newest
- * saved form.
+ * Opens the homepage and reads the href of the resume link of each saved form
  * @param {HomepagePage} homepage
- * @returns {Promise<string | null>} null when the account has no saved form, which is the case on the first run in an environment
  */
-export async function readLatestResumeHref(homepage) {
+export async function readResumeHrefs(homepage) {
   await homepage.open()
-  if (!(await homepage.hasResumeLink())) {
-    return null
-  }
-  return (await homepage.latestContinueLink()).getAttribute('href')
+  return homepage.resumeHrefs()
 }
 
 /**
- * Reloads the homepage until the newest resume link is different from the
- * one before the save. The account keeps the saved forms of earlier runs, so
- * a different link shows that the save of this run is on the homepage.
+ * Reloads the homepage until it has a resume link that was not there before
+ * the save. The account keeps the saved forms of earlier runs, so the new link
+ * is the save of this run.
  * @param {HomepagePage} homepage
- * @param {string | null} hrefBefore - from readLatestResumeHref before the save
+ * @param {string[]} hrefsBefore - from readResumeHrefs before the save
+ * @returns {Promise<string>} the href of the new resume link
  */
-export async function waitForNewSaveAndExitLink(homepage, hrefBefore) {
-  await browser.waitUntil(
-    async () => (await readLatestResumeHref(homepage)) !== hrefBefore,
+export function waitForNewSaveAndExitLink(homepage, hrefsBefore) {
+  // waitUntil resolves with the value that the condition gives, which is the
+  // new href
+  return browser.waitUntil(
+    async () =>
+      (await readResumeHrefs(homepage)).find(
+        (href) => !hrefsBefore.includes(href)
+      ),
     {
       timeout: SAVED_FORM_TIMEOUT,
       interval: 5000,
