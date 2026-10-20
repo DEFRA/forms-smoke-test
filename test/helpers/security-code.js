@@ -17,7 +17,12 @@ export async function readSecurityCode(email) {
 
   const response = await fetch(
     `${IDENTITY_API_URL}/test/otp/${encodeURIComponent(email)}/SIGNIN_VERIFY_EMAIL`,
-    { headers: { Authorization: `Bearer ${OTP_TEST_READ_SECRET}` } }
+    {
+      headers: {
+        Authorization: `Bearer ${OTP_TEST_READ_SECRET}`,
+        'User-Agent': 'smoke-test'
+      }
+    }
   )
 
   if (!response.ok) {
