@@ -1,7 +1,9 @@
-import { Page } from '~/test/page-objects/page.js'
+import { FormPage } from '~/test/page-objects/form.page.js'
 import { $ } from '@wdio/globals'
 
-class SummaryPage extends Page {
+class SummaryPage extends FormPage {
+  suffix = '/summary'
+
   get summary() {
     return $('aria/Summary')
   }
@@ -17,6 +19,20 @@ class SummaryPage extends Page {
   get submitButton() {
     return $('aria/Submit')
   }
+
+  /**
+   * @param {string} question - the text of the summary list key
+   */
+  answer(question) {
+    return $(`dt.govuk-summary-list__key=${question}`)
+      .parentElement()
+      .$('.govuk-summary-list__value')
+  }
 }
 
-export default new SummaryPage()
+export const summaryV2Page = new SummaryPage({
+  slug: 'e2e-form-v2',
+  state: 'draft'
+})
+
+export default new SummaryPage({ slug: 'e2e-form', state: 'draft' })

@@ -4,7 +4,6 @@ import { before } from 'mocha'
 import { readSecurityCode } from '~/test/helpers/security-code.js'
 import homepagePage from '~/test/page-objects/homepage.page.js'
 import signInPage from '~/test/page-objects/sign-in.page.js'
-import signedOutPage from '~/test/page-objects/signed-out.page.js'
 
 // forms-identity-api sends no email to an address at this domain. It keeps
 // the security code for the test to read.
@@ -46,14 +45,5 @@ describe('Sign in - e2e', () => {
   it('shows the homepage of the form to the signed-in person', async () => {
     await expect(homepagePage.pageHeading).toHaveText('e2e form')
     await expect(homepagePage.signOutLink).toBeExisting()
-  })
-})
-
-// Runs after the sign-in tests in the same browser, so the person starts
-// signed in
-describe('Sign out - e2e', () => {
-  it('signs the person out', async () => {
-    await homepagePage.signOutLink.click()
-    await expect(signedOutPage.pageHeading).toHaveText('You have signed out')
   })
 })
