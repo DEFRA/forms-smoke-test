@@ -71,7 +71,10 @@ export const config = {
   capabilities: [
     {
       browserName: 'chrome',
-      'wdio:enforceWebDriverClassic': true
+      'wdio:enforceWebDriverClassic': true,
+      'goog:chromeOptions': {
+        args: ['--user-agent=smoke-test']
+      }
     }
   ],
 

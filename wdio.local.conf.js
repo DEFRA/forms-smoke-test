@@ -68,7 +68,13 @@ export const config = {
   //
 
   capabilities: debug
-    ? [{ browserName: 'chrome', 'wdio:enforceWebDriverClassic': true }]
+    ? [
+        {
+          browserName: 'chrome',
+          'wdio:enforceWebDriverClassic': true,
+          'goog:chromeOptions': { args: ['--user-agent=smoke-test'] }
+        }
+      ]
     : [
         {
           maxInstances: 1,
@@ -79,7 +85,8 @@ export const config = {
               '--no-sandbox',
               '--disable-infobars',
               '--disable-gpu',
-              '--window-size=1920,1080'
+              '--window-size=1920,1080',
+              '--user-agent=smoke-test'
             ]
           }
         }
