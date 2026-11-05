@@ -38,10 +38,10 @@ function browserProxy() {
 }
 
 /**
- * The hosts that bypass the proxy and are reached directly, from the
- * comma-separated NO_PROXY. This keeps internal CDP traffic, such as the
- * runner on cdp-int, off the proxy. CDP lists each host with a leading dot,
- * which the capability wants as a `*.` wildcard.
+ * The hosts that bypass the proxy and are reached directly, as an array from
+ * the comma-separated NO_PROXY. This keeps internal CDP traffic, such as the
+ * runner on cdp-int, off the proxy. The entries are the standard NO_PROXY
+ * form, which the proxy capability takes as is.
  * @returns {string[]}
  */
 function noProxyHosts() {
@@ -55,7 +55,6 @@ function noProxyHosts() {
     .split(',')
     .map((host) => host.trim())
     .filter(Boolean)
-    .map((host) => (host.startsWith('.') ? `*${host}` : host))
 }
 
 export const config = {
