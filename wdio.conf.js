@@ -7,30 +7,55 @@ const oneHour = 60 * 60 * 1000
 
 /**
  * The browser proxy capability for a run on the CDP platform. The platform
- * provides its outbound proxy as HTTP_PROXY, so an external call such as the
- * sign-in redirect reaches its host through the proxy rather than being
- * dropped. A local run has no HTTP_PROXY and stays direct.
+ * provides its outbound proxy as HTTP_PROXY and HTTPS_PROXY, so an external
+ * call such as the sign-in redirect reaches its host through the proxy rather
+ * than being dropped. Each variable maps to its own capability field. A local
+ * run has neither variable and stays direct.
  * @returns {Partial<WebdriverIO.Capabilities>}
  */
 function browserProxy() {
-  const proxyUrl = process.env.HTTP_PROXY
+  const httpProxy = process.env.HTTP_PROXY
+  const httpsProxy = process.env.HTTPS_PROXY
 
-  if (!proxyUrl) {
+  if (!httpProxy && !httpsProxy) {
     return {}
   }
 
-  const proxyHost = new URL(proxyUrl).host
-
-  return {
-    proxy: {
-      proxyType: 'manual',
-      httpProxy: proxyHost,
-      sslProxy: proxyHost,
-      // Internal CDP hosts are reached directly, so only external calls use
-      // the proxy and the runner on cdp-int stays direct.
-      noProxy: ['*.cdp-int.defra.cloud']
-    }
+  const proxy = {
+    proxyType: 'manual',
+    noProxy: noProxyHosts()
   }
+
+  if (httpProxy) {
+    proxy.httpProxy = new URL(httpProxy).host
+  }
+
+  if (httpsProxy) {
+    proxy.sslProxy = new URL(httpsProxy).host
+  }
+
+  return { proxy }
+}
+
+/**
+ * The hosts that bypass the proxy and are reached directly, from the
+ * comma-separated NO_PROXY. This keeps internal CDP traffic, such as the
+ * runner on cdp-int, off the proxy. CDP lists each host with a leading dot,
+ * which the capability wants as a `*.` wildcard.
+ * @returns {string[]}
+ */
+function noProxyHosts() {
+  const noProxy = process.env.NO_PROXY
+
+  if (!noProxy) {
+    return []
+  }
+
+  return noProxy
+    .split(',')
+    .map((host) => host.trim())
+    .filter(Boolean)
+    .map((host) => (host.startsWith('.') ? `*${host}` : host))
 }
 
 export const config = {
