@@ -5,6 +5,34 @@ import { selectSpecs } from './specs.conf.js'
 const debug = process.env.DEBUG
 const oneHour = 60 * 60 * 1000
 
+/**
+ * The browser proxy capability for a run on the CDP platform. The platform
+ * provides its outbound proxy as HTTP_PROXY, so an external call such as the
+ * sign-in redirect reaches its host through the proxy rather than being
+ * dropped. A local run has no HTTP_PROXY and stays direct.
+ * @returns {Partial<WebdriverIO.Capabilities>}
+ */
+function browserProxy() {
+  const proxyUrl = process.env.HTTP_PROXY
+
+  if (!proxyUrl) {
+    return {}
+  }
+
+  const proxyHost = new URL(proxyUrl).host
+
+  return {
+    proxy: {
+      proxyType: 'manual',
+      httpProxy: proxyHost,
+      sslProxy: proxyHost,
+      // Internal CDP hosts are reached directly, so only external calls use
+      // the proxy and the runner on cdp-int stays direct.
+      noProxy: ['*.cdp-int.defra.cloud']
+    }
+  }
+}
+
 export const config = {
   //
   // ====================
@@ -71,7 +99,8 @@ export const config = {
   capabilities: [
     {
       browserName: 'chrome',
-      'wdio:enforceWebDriverClassic': true
+      'wdio:enforceWebDriverClassic': true,
+      ...browserProxy()
     }
   ],
 
