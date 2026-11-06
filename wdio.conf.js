@@ -1,6 +1,7 @@
 import { browser } from '@wdio/globals'
 
 import { selectSpecs } from './specs.conf.js'
+import { appendSmokeTestUserAgent } from './test/helpers/user-agent.js'
 
 const debug = process.env.DEBUG
 const oneHour = 60 * 60 * 1000
@@ -269,7 +270,9 @@ export const config = {
    * @param {Array.<String>} specs        List of spec file paths that are to be run
    * @param {object}         browser      instance of created browser/device session
    */
-  // before: function (capabilities, specs) {},
+  before: async function () {
+    await appendSmokeTestUserAgent()
+  },
   /**
    * Runs before a WebdriverIO command gets executed.
    * @param {string} commandName hook command name

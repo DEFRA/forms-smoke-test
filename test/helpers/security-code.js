@@ -1,3 +1,5 @@
+import { SMOKE_TEST_USER_AGENT } from './user-agent.js'
+
 const { IDENTITY_API_URL, OTP_TEST_READ_SECRET } = process.env
 
 /**
@@ -17,7 +19,12 @@ export async function readSecurityCode(email) {
 
   const response = await fetch(
     `${IDENTITY_API_URL}/test/otp/${encodeURIComponent(email)}/SIGNIN_VERIFY_EMAIL`,
-    { headers: { Authorization: `Bearer ${OTP_TEST_READ_SECRET}` } }
+    {
+      headers: {
+        Authorization: `Bearer ${OTP_TEST_READ_SECRET}`,
+        'User-Agent': SMOKE_TEST_USER_AGENT
+      }
+    }
   )
 
   if (!response.ok) {
