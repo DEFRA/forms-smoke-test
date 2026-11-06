@@ -6,6 +6,58 @@ import { appendSmokeTestUserAgent } from './test/helpers/user-agent.js'
 const debug = process.env.DEBUG
 const oneHour = 60 * 60 * 1000
 
+/**
+ * The browser proxy capability for a run on the CDP platform. The platform
+ * provides its outbound proxy as HTTP_PROXY and HTTPS_PROXY, so an external
+ * call such as the sign-in redirect reaches its host through the proxy rather
+ * than being dropped. Each variable maps to its own capability field. A local
+ * run has neither variable and stays direct.
+ * @returns {Partial<WebdriverIO.Capabilities>}
+ */
+function browserProxy() {
+  const httpProxy = process.env.HTTP_PROXY
+  const httpsProxy = process.env.HTTPS_PROXY
+
+  if (!httpProxy && !httpsProxy) {
+    return {}
+  }
+
+  const proxy = {
+    proxyType: 'manual',
+    noProxy: noProxyHosts()
+  }
+
+  if (httpProxy) {
+    proxy.httpProxy = new URL(httpProxy).host
+  }
+
+  if (httpsProxy) {
+    proxy.sslProxy = new URL(httpsProxy).host
+  }
+
+  return { proxy }
+}
+
+/**
+ * The hosts that bypass the proxy and are reached directly, as an array from
+ * the comma-separated NO_PROXY. This keeps internal CDP traffic, such as the
+ * runner on cdp-int, off the proxy. The entries are the standard NO_PROXY
+ * form, which the proxy capability takes as is.
+ * @returns {string[]}
+ */
+function noProxyHosts() {
+  const noProxy = process.env.NO_PROXY
+
+  if (!noProxy) {
+    return []
+  }
+
+  return noProxy
+    .split(',')
+    .map((host) => host.trim())
+    .filter(Boolean)
+}
+
 export const config = {
   //
   // ====================
@@ -72,7 +124,8 @@ export const config = {
   capabilities: [
     {
       browserName: 'chrome',
-      'wdio:enforceWebDriverClassic': true
+      'wdio:enforceWebDriverClassic': true,
+      ...browserProxy()
     }
   ],
 
