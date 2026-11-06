@@ -2,6 +2,7 @@ import allure from 'allure-commandline'
 import { browser } from '@wdio/globals'
 
 import { selectSpecs } from './specs.conf.js'
+import { appendSmokeTestUserAgent } from './test/helpers/user-agent.js'
 
 const debug = process.env.DEBUG
 const oneMinute = 60 * 1000
@@ -68,13 +69,7 @@ export const config = {
   //
 
   capabilities: debug
-    ? [
-        {
-          browserName: 'chrome',
-          'wdio:enforceWebDriverClassic': true,
-          'goog:chromeOptions': { args: ['--user-agent=smoke-test'] }
-        }
-      ]
+    ? [{ browserName: 'chrome', 'wdio:enforceWebDriverClassic': true }]
     : [
         {
           maxInstances: 1,
@@ -85,8 +80,7 @@ export const config = {
               '--no-sandbox',
               '--disable-infobars',
               '--disable-gpu',
-              '--window-size=1920,1080',
-              '--user-agent=smoke-test'
+              '--window-size=1920,1080'
             ]
           }
         }
@@ -230,7 +224,9 @@ export const config = {
    * @param {Array.<String>} specs        List of spec file paths that are to be run
    * @param {object}         browser      instance of created browser/device session
    */
-  // before: function (capabilities, specs) {},
+  before: async function () {
+    await appendSmokeTestUserAgent()
+  },
   /**
    * Runs before a WebdriverIO command gets executed.
    * @param {string} commandName hook command name
