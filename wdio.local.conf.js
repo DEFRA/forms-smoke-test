@@ -13,9 +13,6 @@ const oneHour = 60 * 60 * 1000
 process.env.IDENTITY_API_URL ??= 'http://localhost:3010'
 process.env.OTP_TEST_READ_SECRET ??= 'local-test-read-secret'
 
-// The local test harness runs forms-runner with sign-in
-process.env.USE_SIGN_IN_FEATURE ??= 'true'
-
 export const config = {
   //
   // ====================

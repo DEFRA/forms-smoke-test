@@ -24,13 +24,6 @@ Every run:
 - Fill in and submit the e2e form - v2 (preview, draft)
 - Each page of both forms has no WCAG 2.2 AA accessibility errors, from the first question to the confirmation page
 
-When `USE_SIGN_IN_FEATURE` is not `true`:
-
-- Save the e2e form part way through, with an email address and a security question
-- Each page of the save journey has no WCAG 2.2 AA accessibility errors
-
-When `USE_SIGN_IN_FEATURE` is `true`:
-
 - Sign in with an email address and a security code
 - Give a phone number, on the first sign-in only
 - See the form homepage when signed in
@@ -39,6 +32,7 @@ When `USE_SIGN_IN_FEATURE` is `true`:
 - Continue the saved form from the homepage
 - See all the saved answers on the check your answers page
 - Sign out
+- Select save and exit when signed out, sign in from the page that asks for it, and see the form saved
 
 ## Local Development
 
@@ -81,15 +75,12 @@ The results of the test run are made available in the portal.
 
 ### Save and exit tests
 
-forms-runner has 2 save-and-exit flows. Its `USE_SIGN_IN_FEATURE` flag selects one. This test suite reads a flag with the same name, and [specs.conf.js](specs.conf.js) selects the specs for that flow:
+The specs in [test/specs/sign-in](test/specs/sign-in) run in this order, in one browser, so that each spec starts with the session that the spec before it left:
 
-- Flag not set, or not `true`: the specs in [test/specs/memorable-word](test/specs/memorable-word). They save the form with an email address and a security question.
-- Flag `true`: the specs in [test/specs/sign-in](test/specs/sign-in). They run in this order, in one browser, so that each spec uses the session of the sign-in spec:
-  1. `sign-in.e2e.js` signs in.
-  2. `save-and-resume.e2e.js` completes the e2e form - v2, saves it from the summary page, resumes it from the homepage, and then checks the answers on the summary page.
-  3. `sign-out.e2e.js` signs out.
-
-Set `USE_SIGN_IN_FEATURE` on this test suite to the same value as on forms-runner in that environment. [wdio.local.conf.js](wdio.local.conf.js) sets it to `true` for the local test harness.
+1. `sign-in.e2e.js` signs in.
+2. `save-and-resume.e2e.js` completes the e2e form - v2, saves it from the summary page, resumes it from the homepage, and then checks the answers on the summary page.
+3. `sign-out.e2e.js` signs out.
+4. `save-when-signed-out.e2e.js` completes the e2e form - v2 when signed out, selects save and exit, signs in from the page that asks for it, and then checks that the form is saved.
 
 ### Sign-in test
 
@@ -97,7 +88,7 @@ Set `USE_SIGN_IN_FEATURE` on this test suite to the same value as on forms-runne
 
 The environment must have:
 
-- `USE_SIGN_IN_FEATURE=true` on forms-runner and on this test suite
+- `USE_SIGN_IN_FEATURE=true` on forms-runner
 - `OTP_TEST_READ_SECRET` on forms-identity-api and on this test suite, with the same value
 - `IDENTITY_API_URL` on this test suite, the URL of forms-identity-api in that environment (for example `https://forms-identity-api.prod.cdp-int.defra.cloud`)
 

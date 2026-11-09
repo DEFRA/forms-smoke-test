@@ -2,6 +2,10 @@ import { SMOKE_TEST_USER_AGENT } from './user-agent.js'
 
 const { IDENTITY_API_URL, OTP_TEST_READ_SECRET } = process.env
 
+// forms-identity-api sends no email to an address at this domain. It keeps
+// the security code for the test to read.
+export const SMOKE_TEST_EMAIL = 'smoke-test@example.forms.defra.gov.uk'
+
 /**
  * Reads the sign-in security code that forms-identity-api keeps for a test
  * address.
